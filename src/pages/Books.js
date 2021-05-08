@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 class Books extends React.Component {
   render() {
-    console.log(this.props.history);
+    console.log(this.props);
     return (
       <div>
         <div>harry potter series</div>
@@ -18,4 +19,10 @@ class Books extends React.Component {
   }
 }
 
-export default Books;
+const mapStateToProps = (state) => {
+  return { state };
+};
+
+export default connect(mapStateToProps, null)(Books);
+
+// export default Books;
