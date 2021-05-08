@@ -1,20 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchMovie } from "../actions";
+import MovieCard from "../components/MovieCard";
 
+//TODO where to start?!?!?
 class Movies extends React.Component {
+  componentDidMount() {
+    this.props.fetchMovie("671");
+    console.log(this.props.movie);
+  }
   render() {
-    console.log(this.props.history);
     return (
       <div>
-        <div>this is where the title will be</div>
-        <div>Movie Component</div>
-        <div>Movie Component</div>
-        <div>Movie Component</div>
-        <div>Movie Component</div>
-
-        <footer>i am a proud footer</footer>
+        <MovieCard data={this.props.movie} />
       </div>
     );
   }
 }
 
-export default Movies;
+const mapStateToProps = (state) => {
+  return { movie: state.movie };
+};
+
+export default connect(mapStateToProps, { fetchMovie })(Movies);
+
+//
