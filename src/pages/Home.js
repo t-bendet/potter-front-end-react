@@ -2,7 +2,6 @@ import React from "react";
 
 class Home extends React.Component {
   render() {
-    console.log(this.props.history);
     return (
       <div>
         <div>this is where the title will be</div>

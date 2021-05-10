@@ -13,6 +13,7 @@ class Movies extends React.Component {
   render() {
     return (
       <div>
+        <MovieCard data={this.props.movie} />
         <h1>movie</h1>
       </div>
     );
@@ -24,5 +25,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchMovie })(Movies);
-
-//<MovieCard data={this.props.movie} />
