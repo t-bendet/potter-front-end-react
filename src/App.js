@@ -7,9 +7,7 @@ import Movies from "./pages/Movies";
 import Games from "./pages/Games";
 import Characters from "./pages/Characters";
 import PotterApi from "./pages/PotterApi";
-
-import Cookies from "universal-cookie";
-const cookie = new Cookies();
+import Signup from "./pages/Signup";
 
 class App extends React.Component {
   render() {
@@ -17,7 +15,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/books" component={Books} />
           <Route exact path="/movies" component={Movies} />
           <Route exact path="/games" component={Games} />

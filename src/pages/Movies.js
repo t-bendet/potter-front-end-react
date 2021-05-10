@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchMovie } from "../actions";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../components/movies/MovieCard";
 
 //TODO where to start?!?!?
 //useMemo?
