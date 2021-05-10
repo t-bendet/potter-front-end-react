@@ -1,15 +1,20 @@
 import React from "react";
 import backEnd from "../apis/backEnd";
 import Cookies from "universal-cookie";
+import { connect } from "react-redux";
+import { signIn, signOut } from "../actions";
+
 const cookie = new Cookies();
-cookie.addChangeListener(() => {
-  console.log("cookie is changing");
-});
 
 class Authentication extends React.Component {
   state = { isSignedIn: false };
-
   // sign in and out
+  componentDidMount() {
+    const test = cookie.get("token");
+    if (test) {
+      this.setState({ isSignedIn: true });
+    }
+  }
   onSignInClick = async () => {
     const res = await backEnd.post("/users/login", {
       email: "talbendet21@gamil.com",
@@ -21,7 +26,6 @@ class Authentication extends React.Component {
       this.setState({ isSignedIn: true });
     }
   };
-
   onSignOutClick = async () => {
     const res = await backEnd.post("/users/logout", "", {
       headers: { Authorization: cookie.get("token") },

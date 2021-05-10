@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import authenticationReducer from "./authenticationReducer";
 const movieReducer = (state = [], action) => {
   switch (action.type) {
     case "FETCH_MOVIE":
@@ -10,4 +11,5 @@ const movieReducer = (state = [], action) => {
 
 export default combineReducers({
   movie: movieReducer,
+  authentication: authenticationReducer,
 });

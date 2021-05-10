@@ -7,3 +7,15 @@ export const fetchMovie = (movie_id) => async (dispatch) => {
 
   dispatch({ type: "FETCH_MOVIE", payload: response.data });
 };
+
+export const signIn = () => {
+  return {
+    type: "SIGN_IN",
+  };
+};
+
+export const signOut = () => {
+  return {
+    type: "SIGN_OUT",
+  };
+};
