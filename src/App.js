@@ -7,18 +7,15 @@ import Movies from "./pages/Movies";
 import Games from "./pages/Games";
 import Characters from "./pages/Characters";
 import PotterApi from "./pages/PotterApi";
-import Signup from "./pages/Signup";
-import Cookies from "universal-cookie";
-
-const cookie = new Cookies();
+import { getCookie, setCookie, removeCookie } from "./utils/cookies";
+import { connect } from "react-redux";
+import { validateUser } from "./actions";
 
 class App extends React.Component {
   componentDidMount() {
-    const test = cookie.get("token");
-    if (test) {
-      console.log(test);
-    }
+    this.props.validateUser(getCookie("token"));
   }
+
   render() {
     return (
       <BrowserRouter>
@@ -36,4 +33,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    isSignedIn: state.authentication.isSignedIn,
+    user: state.authentication.user,
+  };
+};
+
+export default connect(mapStateToProps, { validateUser })(App);

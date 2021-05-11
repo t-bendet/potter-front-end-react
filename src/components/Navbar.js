@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Authentication from "./Authentication";
+import UserStatusBtn from "./UserStatusBtn";
 
 class Navbar extends React.Component {
   render() {
@@ -25,7 +25,7 @@ class Navbar extends React.Component {
           potter Api
         </Link>
         <div className="right menu">
-          <Authentication />
+          <UserStatusBtn />
         </div>
       </div>
     );
