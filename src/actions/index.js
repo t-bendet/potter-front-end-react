@@ -1,4 +1,5 @@
 import superagent from "superagent";
+import axios from "axios";
 
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
@@ -31,22 +32,23 @@ export const validateUser = (token) => async (dispatch) => {
   }
 };
 
-export const signIn =
-  ({ password, email }) =>
-  async (dispatch) => {
-    try {
-      const response = await superagent
-        .post(`${DB}/users/login`)
-        .send({ password, email });
-      if (response.body.error) {
-        dispatch({ type: "SIGN_IN_FAILURE", payload: null });
-      } else {
-        dispatch({ type: "SIGN_IN_SUCCESS", payload: response.body });
-      }
-    } catch (e) {
-      console.log(e);
+export const signIn = (formValues) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${DB}/users/login`, {
+      email: "talbendet21@gmail.com",
+      password: "123456789",
+    });
+
+    console.log(response);
+    if (response.body.error) {
+      dispatch({ type: "SIGN_IN_FAILURE", payload: null });
+    } else {
+      dispatch({ type: "SIGN_IN_SUCCESS", payload: response.body });
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const signOut = (token) => async (dispatch) => {
   try {

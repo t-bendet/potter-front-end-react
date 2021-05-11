@@ -1,16 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signIn, signOut } from "../actions";
+import { signOut } from "../actions";
 import { getCookie, setCookie, removeCookie } from "../utils/cookies";
+import { Link } from "react-router-dom";
 
 class UserStatusBtn extends React.Component {
-  onSignInClick = async () => {
-    console.log("redirect to login page");
-    this.props.signIn({
-      email: "talbendet21@gamil.com",
-      password: "123456789",
-    });
-  };
   componentDidUpdate() {
     if (this.props.token) {
       setCookie("token", this.props.token);
@@ -19,7 +13,6 @@ class UserStatusBtn extends React.Component {
     }
   }
   onSignOutClick = async () => {
-    console.log(getCookie("token"));
     this.props.signOut(getCookie("token"));
     removeCookie("token");
   };
@@ -34,10 +27,16 @@ class UserStatusBtn extends React.Component {
       );
     } else {
       return (
-        <button onClick={this.onSignInClick} className="ui green  button">
-          <i className="icon"></i>
-          Sign In
-        </button>
+        <div>
+          <Link to="/signIn" className="ui green  button">
+            <i className="icon"></i>
+            Sign In
+          </Link>
+          <Link to="/register" className="ui green  button">
+            <i className="icon"></i>
+            Register
+          </Link>
+        </div>
       );
     }
   }
@@ -55,8 +54,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signIn, signOut })(UserStatusBtn);
+export default connect(mapStateToProps, { signOut })(UserStatusBtn);
 
 //TODO change isSignedIn === null to a spinner
 //TODO add try catch to all
-//change name
