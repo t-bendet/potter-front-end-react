@@ -2,8 +2,19 @@ import React from "react";
 import { Field, formValues, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { signIn } from "../../actions";
+import history from "../../history";
 
 class SignIn extends React.Component {
+  componentDidMount() {
+    if (this.props.isSignedIn) {
+      history.push("/userPage");
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.isSignedIn) {
+      history.push("/userPage");
+    }
+  }
   //if user touch input and leaves
   renderError({ error, touched }) {
     if (touched && error) {
@@ -53,10 +64,10 @@ const validate = (formValues) => {
   if (!formValues.email) {
     errors.email = "why no email?!?!?";
   }
+
   if (!formValues.password) {
     errors.password = "why no password?!?!?!";
   }
-  return errors;
 };
 
 const formWrapped = reduxForm({
@@ -64,7 +75,14 @@ const formWrapped = reduxForm({
   validate,
 })(SignIn);
 
-export default connect(null, { signIn })(formWrapped);
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.authentication.isSignedIn,
+    user: state.authentication.user,
+  };
+};
+
+export default connect(mapStateToProps, { signIn })(formWrapped);
 //TODO add logic to redirect from here if user logged in mapstatetoprops user
-// TODO password ******
-//TODO turn into reusable components
+//TODO password ******
+//TODO add delete user account

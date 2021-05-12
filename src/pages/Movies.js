@@ -8,12 +8,11 @@ import MovieCard from "../components/movies/MovieCard";
 class Movies extends React.Component {
   componentDidMount() {
     this.props.fetchMovie("671");
-    console.log(this.props.movie);
   }
   render() {
     return (
       <div>
-        <MovieCard data={this.props.movie} />
+        {this.props.movie.title && <MovieCard data={this.props.movie} />}
         <h1>movie</h1>
       </div>
     );

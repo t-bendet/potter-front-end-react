@@ -2,8 +2,20 @@ import React from "react";
 import { Field, formValues, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions"; // add logic to redirect from here if user logged in
+import history from "../../history";
 
 class Register extends React.Component {
+  componentDidMount() {
+    if (this.props.isSignedIn) {
+      history.push("/userPage");
+      console.log(history);
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.isSignedIn) {
+      history.push("/userPage");
+    }
+  }
   //if user touch input and leaves
   renderError({ error, touched }) {
     if (touched && error) {
@@ -71,4 +83,11 @@ const formWrapped = reduxForm({
   validate,
 })(Register);
 
-export default connect(null, { registerUser })(formWrapped);
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.authentication.isSignedIn,
+    user: state.authentication.user,
+  };
+};
+
+export default connect(mapStateToProps, { registerUser })(formWrapped);

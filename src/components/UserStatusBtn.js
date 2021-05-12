@@ -20,10 +20,16 @@ class UserStatusBtn extends React.Component {
   renderAuthButton() {
     if (this.props.isSignedIn) {
       return (
-        <button onClick={this.onSignOutClick} className="ui red  button">
-          <i className="icon"></i>
-          Sign Out
-        </button>
+        <div>
+          <button onClick={this.onSignOutClick} className="ui red  button">
+            <i className="icon sign out alternate"></i>
+            Sign Out
+          </button>
+          <Link to="/userPage" className="ui green  button">
+            <i className="icon user"></i>
+            Your Account
+          </Link>
+        </div>
       );
     } else {
       return (
@@ -33,7 +39,7 @@ class UserStatusBtn extends React.Component {
             Sign In
           </Link>
           <Link to="/register" className="ui green  button">
-            <i className="icon"></i>
+            <i className="icon registered outline"></i>
             Register
           </Link>
         </div>
