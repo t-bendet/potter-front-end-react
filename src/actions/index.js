@@ -4,7 +4,9 @@ import axios from "axios";
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
 
-//TODO add try catch
+//TODO improve try catch
+// TODO hide api key and db(add db key in back end)
+//TODO create a general error action creator and a seprate component to dispaly to user(set time out and then delete error)
 
 export const fetchMovie = (movie_id) => async (dispatch) => {
   try {
@@ -34,19 +36,10 @@ export const validateUser = (token) => async (dispatch) => {
 
 export const signIn = (formValues) => async (dispatch) => {
   try {
-    const response = await axios.post(`${DB}/users/login`, {
-      email: "talbendet21@gmail.com",
-      password: "123456789",
-    });
-
-    console.log(response);
-    if (response.body.error) {
-      dispatch({ type: "SIGN_IN_FAILURE", payload: null });
-    } else {
-      dispatch({ type: "SIGN_IN_SUCCESS", payload: response.body });
-    }
+    const response = await axios.post(`${DB}/users/login`, formValues);
+    dispatch({ type: "SIGN_IN_SUCCESS", payload: response.data });
   } catch (e) {
-    console.log(e);
+    dispatch({ type: "SIGN_IN_FAILURE", payload: null });
   }
 };
 

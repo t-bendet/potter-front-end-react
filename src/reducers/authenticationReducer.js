@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
       };
     //add sign out fail?
     case "SIGN_OUT":
-      return { ...state, isSignedIn: false };
+      return { ...state, isSignedIn: false, user: null };
     default:
       return state;
   }

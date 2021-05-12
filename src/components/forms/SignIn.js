@@ -23,11 +23,14 @@ class SignIn extends React.Component {
       </div>
     );
   };
+
   onSubmit = (formValues) => {
     this.props.signIn(formValues);
   };
   //added class name error for semantic ui(otherwise error display is none)
   render() {
+    console.log(this.props.history);
+
     return (
       <form
         className="ui form error"
