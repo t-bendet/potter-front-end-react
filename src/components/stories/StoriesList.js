@@ -48,7 +48,7 @@ class StoriesList extends React.Component {
         <div className="ui celled list">{this.renderList()}</div>
         <div style={{ textAlign: "right" }}>
           <Link to="/stories/new" className="ui button primary">
-            Create Stream
+            Create Story
           </Link>
         </div>
       </div>

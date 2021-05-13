@@ -26,7 +26,7 @@ class StoryEdit extends React.Component {
   render() {
     return (
       <div>
-        <h3>Edit a Stream</h3>
+        <h3>Edit a Story</h3>
         <StoryForm
           initialValues={this.renderInitValues()}
           onSubmit={this.onSubmit}
@@ -40,17 +40,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { editStory })(StoryEdit);
-
-// onSubmit = (formValues) => {
-//   this.props.editStream(this.props.match.params.id, formValues);
-// };
-
-// return (
-//   <div>
-//     <h3>Edit a Stream</h3>
-//     <StoryFormForm
-//       initialValues={_.pick(this.props.stream, "title", "description")}
-//       onSubmit={this.onSubmit}
-//     />
-//   </div>
-// );
