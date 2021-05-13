@@ -10,6 +10,8 @@ import PotterApi from "./pages/PotterApi";
 import Register from "./components/forms/Register";
 import SignIn from "./components/forms/SignIn";
 import UserPage from "./pages/UserPage";
+import StoryCreate from "./pages/StoryCreate";
+import StoryEdit from "./pages/StoryEdit";
 import Test from "./test";
 
 import { getCookie } from "./utils/cookies";
@@ -40,6 +42,8 @@ class App extends React.Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/signIn" component={SignIn} />
             <Route exact path="/userPage" component={UserPage} />
+            <Route exact path="/stories/new" component={StoryCreate} />
+            <Route path="/stories/edit/:id" exact component={StoryEdit} />
             <Route exact path="/test" component={Test} />
           </Switch>
         </Router>

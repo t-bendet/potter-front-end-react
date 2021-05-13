@@ -5,3 +5,7 @@ export const FETCH_MOVIE = "FETCH_MOVIE";
 export const SET_ERROR = "SET_ERROR";
 export const REGISTER_USER = "REGISTER_USER";
 export const DELETE_USER = "DELETE_USER";
+export const FETCH_USER_STORIES = "FETCH_USER_STORIES";
+export const CREATE_USER_STORY = "CREATE_USER_STORY";
+export const EDIT_USER_STORY = "EDIT_USER_STORY";
+export const DELETE_USER_STORY = "DELETE_USER_STORY";

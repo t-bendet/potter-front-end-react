@@ -8,6 +8,10 @@ import {
   SET_ERROR,
   REGISTER_USER,
   DELETE_USER,
+  FETCH_USER_STORIES,
+  CREATE_USER_STORY,
+  EDIT_USER_STORY,
+  DELETE_USER_STORY,
 } from "./types";
 
 const tmdb = "https://api.themoviedb.org";
@@ -71,7 +75,6 @@ export const registerUser = (formValues) => async (dispatch) => {
 };
 
 export const deleteUser = (token) => async (dispatch) => {
-  console.log(token);
   try {
     const response = await superagent
       .delete(`${DB}/users/me`)
@@ -86,17 +89,58 @@ export const deleteUser = (token) => async (dispatch) => {
 //****************************************User Content Actions******************************************** */
 
 //**User Stories*/
+export const fetchUserStories = (token) => async (dispatch, getState) => {
+  try {
+    const response = await superagent
+      .get(`${DB}/stories`)
+      .set("Authorization", token);
+    console.log(response);
+    dispatch({ type: FETCH_USER_STORIES, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
 
-//create
-//get all
-//get one
+export const createStory = (token, story) => async (dispatch) => {
+  try {
+    const response = await superagent
+      .post(`${DB}/stories`)
+      .set("Authorization", token)
+      .send(story);
+    dispatch({ type: CREATE_USER_STORY, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
+//TODO add a popup are you sure you want to delete
+export const deleteStory = (token, id) => async (dispatch) => {
+  try {
+    const response = await superagent
+      .delete(`${DB}/stories/${id}`)
+      .set("Authorization", token);
+    dispatch({ type: DELETE_USER_STORY, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
+
 //edit
-//delete
+export const editStory = (token, story, id) => async (dispatch) => {
+  console.log(id);
+  try {
+    const response = await superagent
+      .patch(`${DB}/stories/${id}`)
+      .set("Authorization", token)
+      .send(story);
+    dispatch({ type: EDIT_USER_STORY, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
 
 //**User Drawings*/
 
 //create
 //get all
-//get one
 //edit
 //delete

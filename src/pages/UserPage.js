@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import history from "../history";
 import { deleteUser } from "../actions";
 import { removeCookie, getCookie } from "../utils/cookies";
+import StoriesList from "../components/stories/StoriesList";
 //TODO improve programmatic navigation
 
 class UserPage extends React.Component {
@@ -20,6 +21,7 @@ class UserPage extends React.Component {
     return (
       <div>
         <h1>UserPage</h1>
+        <StoriesList />
         <button onClick={this.onDeleteClick} className="ui red  button">
           <i className="icon sign out alternate"></i>
           DELETE USER
@@ -37,3 +39,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { deleteUser })(UserPage);
+
+//edit content
+//create content
+//delete content
