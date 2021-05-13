@@ -10,6 +10,7 @@ import PotterApi from "./pages/PotterApi";
 import Register from "./components/forms/Register";
 import SignIn from "./components/forms/SignIn";
 import UserPage from "./pages/UserPage";
+import Test from "./test";
 
 import { getCookie } from "./utils/cookies";
 import { connect } from "react-redux";
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/signIn" component={SignIn} />
             <Route exact path="/userPage" component={UserPage} />
+            <Route exact path="/test" component={Test} />
           </Switch>
         </Router>
       </div>

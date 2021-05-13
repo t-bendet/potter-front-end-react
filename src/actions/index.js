@@ -13,8 +13,9 @@ import {
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
 
-// TODO hide api key and db(add db key in back end)
+//****************************************External Api Actions******************************************** */
 
+//
 export const fetchMovie = (movie_id) => async (dispatch) => {
   try {
     const response = await superagent.get(
@@ -25,6 +26,8 @@ export const fetchMovie = (movie_id) => async (dispatch) => {
     dispatch({ type: SET_ERROR, payload: e.message });
   }
 };
+
+//****************************************User Auth Actions******************************************** */
 
 export const validateUser = (token) => async (dispatch) => {
   try {
@@ -66,7 +69,6 @@ export const registerUser = (formValues) => async (dispatch) => {
     dispatch({ type: SET_ERROR, payload: e.message });
   }
 };
-//TODO use response?
 
 export const deleteUser = (token) => async (dispatch) => {
   console.log(token);
@@ -80,3 +82,21 @@ export const deleteUser = (token) => async (dispatch) => {
     dispatch({ type: SET_ERROR, payload: e.message });
   }
 };
+
+//****************************************User Content Actions******************************************** */
+
+//**User Stories*/
+
+//create
+//get all
+//get one
+//edit
+//delete
+
+//**User Drawings*/
+
+//create
+//get all
+//get one
+//edit
+//delete
