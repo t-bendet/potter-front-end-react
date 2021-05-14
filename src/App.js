@@ -21,12 +21,12 @@ import history from "./history";
 
 //TODO add logic to prevent sending a request to the server on each mount
 class App extends React.Component {
+  //if a cookie exists in local and no user is signed in,try to validate user
   componentDidMount() {
-    if (getCookie("token")) {
+    if (!this.props.isSignedIn && getCookie("token")) {
       this.props.validateUser(getCookie("token"));
     }
   }
-
   render() {
     return (
       <div className="ui container">
@@ -44,7 +44,6 @@ class App extends React.Component {
             <Route exact path="/userPage" component={UserPage} />
             <Route exact path="/stories/new" component={StoryCreate} />
             <Route path="/stories/edit/:id" exact component={StoryEdit} />
-            <Route exact path="/test" component={Test} />
           </Switch>
         </Router>
       </div>

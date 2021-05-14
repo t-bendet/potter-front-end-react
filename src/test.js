@@ -25,7 +25,7 @@ const testConfig = {
   },
   fullScreen: {
     enable: true,
-    zIndex: 1,
+    zIndex: -50,
   },
   detectRetina: true,
   fpsLimit: 60,
@@ -53,7 +53,7 @@ const testConfig = {
         enable: true,
         mode: "bubble",
         parallax: {
-          enable: false,
+          enable: true,
           force: 2,
           smooth: 10,
         },
@@ -402,7 +402,7 @@ const testConfig = {
       animation: {
         count: 0,
         enable: false,
-        speed: 40,
+        speed: 30,
         sync: false,
         destroy: "none",
         minimumValue: 0.1,

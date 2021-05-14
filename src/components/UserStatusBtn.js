@@ -8,8 +8,6 @@ class UserStatusBtn extends React.Component {
   componentDidUpdate() {
     if (this.props.token) {
       setCookie("token", this.props.token);
-    } else {
-      console.log("no token here");
     }
   }
   onSignOutClick = async () => {
