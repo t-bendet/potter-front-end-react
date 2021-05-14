@@ -1,11 +1,10 @@
 import React from "react";
-import { Router, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Movies from "./pages/Movies";
 import Games from "./pages/Games";
-import Characters from "./pages/Characters";
 import PotterApi from "./pages/PotterApi";
 import Register from "./components/forms/Register";
 import SignIn from "./components/forms/SignIn";
@@ -44,7 +43,6 @@ class App extends React.Component {
             <Route exact path="/books" component={Books} />
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/games" component={Games} />
-            <Route exact path="/characters" component={Characters} />
             <Route exact path="/potter-Api" component={PotterApi} />
 
             <Route exact path="/register" component={Register} />
@@ -57,6 +55,7 @@ class App extends React.Component {
               path="/stories/edit/:id"
               component={StoryEdit}
             />
+
             <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </Router>

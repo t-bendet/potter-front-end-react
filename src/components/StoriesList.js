@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUserStories, deleteStory } from "../../actions";
-import { getCookie } from "../../utils/cookies";
+import { fetchUserStories, deleteStory } from "../actions";
+import { getCookie } from "../utils/cookies";
 //TODO refector render methods to components
 // refactor story.body to show only first 10 words of each story
 class StoriesList extends React.Component {
@@ -59,8 +59,6 @@ class StoriesList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userStories: state.userStories,
-    // currentUserId: state.auth.userId,
-    // isSignedIn: state.auth.isSignedIn,
   };
 };
 

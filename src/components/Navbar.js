@@ -18,11 +18,8 @@ class Navbar extends React.Component {
         <Link to="/games" className="item">
           Games
         </Link>
-        <Link to="/characters" className="item">
-          Characters
-        </Link>
         <Link to="/potter-Api" className="item">
-          potter Api
+          Potter Api
         </Link>
         <div className="right menu">
           <UserStatusBtn />

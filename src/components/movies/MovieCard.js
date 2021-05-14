@@ -60,7 +60,6 @@ const MovieCard = ({ data }) => {
       <p>character : {data.credits.cast[0].character}</p>
       <p>vote_average : {data.vote_average}</p>
       <p>vote_count : {data.vote_count}</p>
-      //{" "}
       <ReactPlayer url={`${youtube_base_url}${data.videos.results[0].key}`} />
     </div>
   );

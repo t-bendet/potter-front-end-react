@@ -3,6 +3,7 @@ import authenticationReducer from "./authenticationReducer";
 import movieReducer from "./movieReducer";
 import errorReducer from "./errorReducer";
 import userStoriesReducer from "./userStoriesReducer";
+import userDrawingsReducer from "./userDrawingsReducer";
 import { reducer as formReducer } from "redux-form";
 
 export default combineReducers({
@@ -11,4 +12,5 @@ export default combineReducers({
   form: formReducer,
   error: errorReducer,
   userStories: userStoriesReducer,
+  userDrawings: userDrawingsReducer,
 });

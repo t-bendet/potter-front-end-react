@@ -12,8 +12,12 @@ import {
   CREATE_USER_STORY,
   EDIT_USER_STORY,
   DELETE_USER_STORY,
+  FETCH_USER_DRAWINGS,
+  CREATE_USER_DRAWING,
+  EDIT_USER_DRAWING,
+  DELETE_USER_DRAWING,
 } from "./types";
-
+import history from "../history";
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
 
@@ -56,9 +60,7 @@ export const signIn = (formValues) => async (dispatch) => {
 
 export const signOut = (token) => async (dispatch) => {
   try {
-    const response = await superagent
-      .post(`${DB}/users/logout`)
-      .set("Authorization", token);
+    await superagent.post(`${DB}/users/logout`).set("Authorization", token);
     dispatch({ type: SIGN_OUT, payload: null });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -76,9 +78,7 @@ export const registerUser = (formValues) => async (dispatch) => {
 
 export const deleteUser = (token) => async (dispatch) => {
   try {
-    const response = await superagent
-      .delete(`${DB}/users/me`)
-      .set("Authorization", token);
+    await superagent.delete(`${DB}/users/me`).set("Authorization", token);
     dispatch({ type: DELETE_USER, payload: null });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -110,6 +110,7 @@ export const createStory = (token, story) => async (dispatch) => {
     dispatch({ type: SET_ERROR, payload: e.message });
   }
 };
+
 //TODO add a popup are you sure you want to delete
 export const deleteStory = (token, id) => async (dispatch) => {
   try {
@@ -122,7 +123,6 @@ export const deleteStory = (token, id) => async (dispatch) => {
   }
 };
 
-//edit
 export const editStory = (token, story, id) => async (dispatch) => {
   try {
     const response = await superagent
@@ -137,7 +137,48 @@ export const editStory = (token, story, id) => async (dispatch) => {
 
 //**User Drawings*/
 
-//create
-//get all
-//edit
-//delete
+export const fetchUserDrawings = (token) => async (dispatch) => {
+  try {
+    const response = await superagent
+      .get(`${DB}/drawings`)
+      .set("Authorization", token);
+    dispatch({ type: FETCH_USER_DRAWINGS, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
+
+// export const createStory = (token, story) => async (dispatch) => {
+//   try {
+//     const response = await superagent
+//       .post(`${DB}/stories`)
+//       .set("Authorization", token)
+//       .send(story);
+//     dispatch({ type: CREATE_USER_STORY, payload: response.body });
+//   } catch (e) {
+//     dispatch({ type: SET_ERROR, payload: e.message });
+//   }
+// };
+
+// export const deleteStory = (token, id) => async (dispatch) => {
+//   try {
+//     const response = await superagent
+//       .delete(`${DB}/stories/${id}`)
+//       .set("Authorization", token);
+//     dispatch({ type: DELETE_USER_STORY, payload: response.body });
+//   } catch (e) {
+//     dispatch({ type: SET_ERROR, payload: e.message });
+//   }
+// };
+
+// export const editStory = (token, story, id) => async (dispatch) => {
+//   try {
+//     const response = await superagent
+//       .patch(`${DB}/stories/${id}`)
+//       .set("Authorization", token)
+//       .send(story);
+//     dispatch({ type: EDIT_USER_STORY, payload: response.body });
+//   } catch (e) {
+//     dispatch({ type: SET_ERROR, payload: e.message });
+//   }
+// };
