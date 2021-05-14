@@ -9,7 +9,6 @@ class StoryEdit extends React.Component {
     const story = this.props.userStories.find((obj) => {
       return obj._id === this.props.match.params.id;
     });
-    console.log("story", story);
     return {
       title: story.title,
       body: story.body,

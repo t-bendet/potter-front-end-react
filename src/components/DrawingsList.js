@@ -11,12 +11,10 @@ class DrawingsList extends React.Component {
     this.props.fetchUserDrawings(getCookie("token"));
   }
   onDeleteClick = (id) => {
-    console.log(id);
     // this.props.deleteDrawing(getCookie("token"), id);
   };
   renderList() {
     return this.props.userDrawings.map((drawing, i) => {
-      console.log(drawing.imageFile.data);
       return (
         <div className="item" key={drawing._id}>
           <i className="icon book" />
