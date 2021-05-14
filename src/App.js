@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
@@ -12,8 +12,7 @@ import SignIn from "./components/forms/SignIn";
 import UserPage from "./pages/UserPage";
 import StoryCreate from "./pages/StoryCreate";
 import StoryEdit from "./pages/StoryEdit";
-import Test from "./test";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
 import { validateUser } from "./actions";
@@ -24,19 +23,14 @@ class App extends React.Component {
   //if a cookie exists in local and no user is signed in,try to validate user
   componentDidMount() {
     if (!this.props.isSignedIn && getCookie("token")) {
-      console.log("validate cookie");
-
       this.props.validateUser(getCookie("token"));
     }
   }
   componentDidUpdate() {
     if (this.props.isSignedIn && !getCookie("token")) {
-      console.log("setting  cookie");
-
       setCookie("token", this.props.token);
     }
     if (!this.props.isSignedIn && getCookie("token")) {
-      console.log("removing cookie");
       removeCookie("token");
     }
   }
@@ -56,9 +50,14 @@ class App extends React.Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/signIn" component={SignIn} />
 
-            <Route exact path="/userPage" component={UserPage} />
-            <Route exact path="/stories/new" component={StoryCreate} />
-            <Route path="/stories/edit/:id" exact component={StoryEdit} />
+            <ProtectedRoute exact path="/userPage" component={UserPage} />
+            <ProtectedRoute exact path="/stories/new" component={StoryCreate} />
+            <ProtectedRoute
+              exact
+              path="/stories/edit/:id"
+              component={StoryEdit}
+            />
+            <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </Router>
       </div>

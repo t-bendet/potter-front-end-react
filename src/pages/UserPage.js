@@ -7,11 +7,6 @@ import StoriesList from "../components/stories/StoriesList";
 //TODO improve programmatic navigation
 
 class UserPage extends React.Component {
-  componentDidMount() {
-    if (!this.props.isSignedIn) {
-      history.push("/");
-    }
-  }
   onDeleteClick = () => {
     this.props.deleteUser(getCookie("token"));
     removeCookie("token");

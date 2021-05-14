@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signOut } from "../actions";
-import { getCookie, setCookie, removeCookie } from "../utils/cookies";
 import { Link } from "react-router-dom";
+
+//TODO add msg on sign out
 
 class UserStatusBtn extends React.Component {
   onSignOutClick = async () => {
@@ -46,7 +47,6 @@ class UserStatusBtn extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.authentication.isSignedIn,
-    user: state.authentication.user,
     token: state.authentication.token,
   };
 };
