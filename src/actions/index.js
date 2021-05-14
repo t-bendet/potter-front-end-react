@@ -38,6 +38,7 @@ export const validateUser = (token) => async (dispatch) => {
     const response = await superagent
       .get(`${DB}/users/me`)
       .set("Authorization", token);
+    response.body.token = token;
     dispatch({ type: LOG_IN, payload: response.body });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -67,7 +68,6 @@ export const signOut = (token) => async (dispatch) => {
 export const registerUser = (formValues) => async (dispatch) => {
   try {
     const response = await axios.post(`${DB}/users`, formValues);
-    console.log(response.data, "data");
     dispatch({ type: REGISTER_USER, payload: response.data });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -79,7 +79,6 @@ export const deleteUser = (token) => async (dispatch) => {
     const response = await superagent
       .delete(`${DB}/users/me`)
       .set("Authorization", token);
-    console.log(response);
     dispatch({ type: DELETE_USER, payload: null });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -94,7 +93,6 @@ export const fetchUserStories = (token) => async (dispatch, getState) => {
     const response = await superagent
       .get(`${DB}/stories`)
       .set("Authorization", token);
-    console.log(response);
     dispatch({ type: FETCH_USER_STORIES, payload: response.body });
   } catch (e) {
     dispatch({ type: SET_ERROR, payload: e.message });
@@ -126,7 +124,6 @@ export const deleteStory = (token, id) => async (dispatch) => {
 
 //edit
 export const editStory = (token, story, id) => async (dispatch) => {
-  console.log(id);
   try {
     const response = await superagent
       .patch(`${DB}/stories/${id}`)

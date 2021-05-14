@@ -40,8 +40,6 @@ class SignIn extends React.Component {
   };
   //added class name error for semantic ui(otherwise error display is none)
   render() {
-    console.log(this.props.history);
-
     return (
       <form
         className="ui form error"

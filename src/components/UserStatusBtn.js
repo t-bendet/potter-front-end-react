@@ -5,14 +5,8 @@ import { getCookie, setCookie, removeCookie } from "../utils/cookies";
 import { Link } from "react-router-dom";
 
 class UserStatusBtn extends React.Component {
-  componentDidUpdate() {
-    if (this.props.token) {
-      setCookie("token", this.props.token);
-    }
-  }
   onSignOutClick = async () => {
-    this.props.signOut(getCookie("token"));
-    removeCookie("token");
+    this.props.signOut(this.props.token);
   };
   // renders sign in button if not signed in
   renderAuthButton() {
@@ -50,7 +44,6 @@ class UserStatusBtn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     isSignedIn: state.authentication.isSignedIn,
     user: state.authentication.user,

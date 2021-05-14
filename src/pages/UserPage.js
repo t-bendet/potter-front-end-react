@@ -39,7 +39,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { deleteUser })(UserPage);
-
-//edit content
-//create content
-//delete content

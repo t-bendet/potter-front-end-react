@@ -14,7 +14,7 @@ import StoryCreate from "./pages/StoryCreate";
 import StoryEdit from "./pages/StoryEdit";
 import Test from "./test";
 
-import { getCookie } from "./utils/cookies";
+import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
 import { validateUser } from "./actions";
 import history from "./history";
@@ -24,7 +24,20 @@ class App extends React.Component {
   //if a cookie exists in local and no user is signed in,try to validate user
   componentDidMount() {
     if (!this.props.isSignedIn && getCookie("token")) {
+      console.log("validate cookie");
+
       this.props.validateUser(getCookie("token"));
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.isSignedIn && !getCookie("token")) {
+      console.log("setting  cookie");
+
+      setCookie("token", this.props.token);
+    }
+    if (!this.props.isSignedIn && getCookie("token")) {
+      console.log("removing cookie");
+      removeCookie("token");
     }
   }
   render() {
@@ -39,8 +52,10 @@ class App extends React.Component {
             <Route exact path="/games" component={Games} />
             <Route exact path="/characters" component={Characters} />
             <Route exact path="/potter-Api" component={PotterApi} />
+
             <Route exact path="/register" component={Register} />
             <Route exact path="/signIn" component={SignIn} />
+
             <Route exact path="/userPage" component={UserPage} />
             <Route exact path="/stories/new" component={StoryCreate} />
             <Route path="/stories/edit/:id" exact component={StoryEdit} />
@@ -50,7 +65,7 @@ class App extends React.Component {
     );
   }
 }
-
+//TODO remove some of the properties
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.authentication.isSignedIn,
