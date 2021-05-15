@@ -18,6 +18,7 @@ import {
   DELETE_USER_DRAWING,
 } from "./types";
 import history from "../history";
+
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
 
@@ -148,37 +149,53 @@ export const fetchUserDrawings = (token) => async (dispatch) => {
   }
 };
 
-// export const createStory = (token, story) => async (dispatch) => {
-//   try {
-//     const response = await superagent
-//       .post(`${DB}/stories`)
-//       .set("Authorization", token)
-//       .send(story);
-//     dispatch({ type: CREATE_USER_STORY, payload: response.body });
-//   } catch (e) {
-//     dispatch({ type: SET_ERROR, payload: e.message });
-//   }
-// };
+export const createDrawing = (token, drawing) => async (dispatch) => {
+  try {
+    const body = {
+      description: drawing.description,
+      title: drawing.title,
+    };
+    const formData = new FormData();
+    formData.append("imageFile", drawing.imageFile);
+    formData.append("body", JSON.stringify(body));
+    const response = await superagent
+      .post(`${DB}/drawings`)
+      .set("Authorization", token)
+      .send(formData);
+    console.log(response);
+    dispatch({ type: CREATE_USER_DRAWING, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
 
-// export const deleteStory = (token, id) => async (dispatch) => {
-//   try {
-//     const response = await superagent
-//       .delete(`${DB}/stories/${id}`)
-//       .set("Authorization", token);
-//     dispatch({ type: DELETE_USER_STORY, payload: response.body });
-//   } catch (e) {
-//     dispatch({ type: SET_ERROR, payload: e.message });
-//   }
-// };
+export const deleteDrawing = (token, id) => async (dispatch) => {
+  try {
+    const response = await superagent
+      .delete(`${DB}/drawings/${id}`)
+      .set("Authorization", token);
+    dispatch({ type: DELETE_USER_DRAWING, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};
 
-// export const editStory = (token, story, id) => async (dispatch) => {
-//   try {
-//     const response = await superagent
-//       .patch(`${DB}/stories/${id}`)
-//       .set("Authorization", token)
-//       .send(story);
-//     dispatch({ type: EDIT_USER_STORY, payload: response.body });
-//   } catch (e) {
-//     dispatch({ type: SET_ERROR, payload: e.message });
-//   }
-// };
+export const editDrawing = (token, drawing, id) => async (dispatch) => {
+  try {
+    const body = {
+      description: drawing.description,
+      title: drawing.title,
+    };
+    const formData = new FormData();
+    formData.append("imageFile", drawing.imageFile);
+    formData.append("body", JSON.stringify(body));
+    const response = await superagent
+      .patch(`${DB}/drawings/${id}`)
+      .set("Authorization", token)
+      .send(formData);
+    console.log(response);
+    dispatch({ type: EDIT_USER_DRAWING, payload: response.body });
+  } catch (e) {
+    dispatch({ type: SET_ERROR, payload: e.message });
+  }
+};

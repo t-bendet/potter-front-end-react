@@ -11,6 +11,8 @@ import SignIn from "./components/forms/SignIn";
 import UserPage from "./pages/UserPage";
 import StoryCreate from "./pages/StoryCreate";
 import StoryEdit from "./pages/StoryEdit";
+import DrawingCreate from "./pages/DrawingCreate";
+import DrawingEdit from "./pages/DrawingEdit";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
@@ -54,6 +56,16 @@ class App extends React.Component {
               exact
               path="/stories/edit/:id"
               component={StoryEdit}
+            />
+            <ProtectedRoute
+              exact
+              path="/drawings/new"
+              component={DrawingCreate}
+            />
+            <ProtectedRoute
+              exact
+              path="/drawings/edit/:id"
+              component={DrawingEdit}
             />
 
             <Route path="*" component={() => "404 NOT FOUND"} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUserDrawings } from "../actions";
+import { fetchUserDrawings, deleteDrawing } from "../actions";
 //, deleteDrawing
 import { getCookie } from "../utils/cookies";
 //TODO refector render methods to components
@@ -11,7 +11,8 @@ class DrawingsList extends React.Component {
     this.props.fetchUserDrawings(getCookie("token"));
   }
   onDeleteClick = (id) => {
-    // this.props.deleteDrawing(getCookie("token"), id);
+    console.log(id);
+    this.props.deleteDrawing(getCookie("token"), id);
   };
   renderList() {
     return this.props.userDrawings.map((drawing, i) => {
@@ -52,7 +53,7 @@ class DrawingsList extends React.Component {
         <h2>DrawingsList</h2>
         <div className="ui celled list">{this.renderList()}</div>
         <div style={{ textAlign: "right" }}>
-          <Link to="/drawing/new" className="ui button primary">
+          <Link to="/drawings/new" className="ui button primary">
             Create Drawing
           </Link>
         </div>
@@ -67,8 +68,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserDrawings })(DrawingsList);
-
-//, deleteDrawing
-
-//
+export default connect(mapStateToProps, { fetchUserDrawings, deleteDrawing })(
+  DrawingsList
+);

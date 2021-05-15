@@ -12,11 +12,11 @@ class DrawingForm extends React.Component {
     }
   }
 
-  renderInput = ({ input, label, meta, type, accept, onChange }) => {
+  renderInput = ({ input, label, meta }) => {
     return (
       <div>
         <label>{label}</label>
-        <input onChange={onChange} type={type} {...input} />
+        <input {...input} />
         {this.renderError(meta)}
       </div>
     );
@@ -42,23 +42,22 @@ class DrawingForm extends React.Component {
       this.handlePreview(localImageUrl);
     }
   };
-  renderFileInput = ({ input, type, meta }) => {
-    // const { mimeType } = this.props;
+  renderFileInput = ({ input, type, meta, label }) => {
     return (
       <div>
+        <label>{label}</label>
         <input
           name={input.name}
           type={type}
-          // accept={mimeType}
           onChange={(event) => this.handleChange(event, input)}
         />
+        {this.renderError(meta)}
       </div>
     );
   };
 
   onSubmit = (formValues) => {
-    // this.props.onSubmit(formValues);
-    console.log(formValues);
+    this.props.onSubmit(formValues);
   };
 
   render() {
@@ -78,11 +77,19 @@ class DrawingForm extends React.Component {
             component={this.renderInput}
             label="Enter description"
           />
-          <Field name="image" type="file" component={this.renderFileInput} />
+          <Field
+            name="imageFile"
+            type="file"
+            label="imageFile"
+            component={this.renderFileInput}
+          />
           <button className="ui button primary">Submit</button>
         </form>
-        <div style={{ height: "200px" }}>
-          <img className="preview-image"></img>
+        <div>
+          <img
+            className="preview-image"
+            style={{ height: "300px", objectFit: "cover" }}
+          ></img>
         </div>
       </div>
     );
@@ -100,6 +107,10 @@ const validate = (formValues) => {
     errors.description = "You must enter description";
   }
 
+  if (formValues.imageFile && formValues.imageFile.size / 1024 > 1000) {
+    errors.imageFile = "size too big";
+  }
+
   return errors;
 };
 
@@ -107,3 +118,8 @@ export default reduxForm({
   form: "drawingForm",
   validate,
 })(DrawingForm);
+
+//TODO add error in form submit for image type
+// if (formValues.imageFile && !formValues.imageFile.type.includes("image")) {
+//   errors.imageFile = "type no good";
+// }

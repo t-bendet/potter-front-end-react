@@ -4,7 +4,6 @@ import { deleteUser } from "../actions";
 import { removeCookie, getCookie } from "../utils/cookies";
 import StoriesList from "../components/StoriesList";
 import DrawingsList from "../components/DrawingsList";
-import DrawingForm from "../components/forms/DrawingForm";
 //TODO improve programmatic navigation
 
 class UserPage extends React.Component {
@@ -18,7 +17,6 @@ class UserPage extends React.Component {
         <h1>UserPage</h1>
         <StoriesList />
         <DrawingsList />
-        <DrawingForm />
         <button onClick={this.onDeleteClick} className="ui red  button">
           <i className="icon sign out alternate"></i>
           DELETE USER
