@@ -2,12 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { signOut } from "../actions";
 import { Link } from "react-router-dom";
+import history from "../history";
 
 //TODO add msg on sign out
 
 class UserStatusBtn extends React.Component {
   onSignOutClick = async () => {
     this.props.signOut(this.props.token);
+    history.push("/");
+    window.location.reload();
   };
   // renders sign in button if not signed in
   renderAuthButton() {

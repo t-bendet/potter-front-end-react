@@ -12,8 +12,7 @@ const INITIAL_STATE = {
   token: null,
 };
 
-// logic is not great,
-
+//TODO add delete users drawings and stories on log out
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOG_IN:
