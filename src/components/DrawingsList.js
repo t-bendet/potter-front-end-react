@@ -15,6 +15,15 @@ class DrawingsList extends React.Component {
     this.props.deleteDrawing(getCookie("token"), id);
   };
   renderList() {
+    if (this.props.isLoading) {
+      return (
+        <div class="ui segment">
+          <div class="ui active dimmer">
+            <div class="ui text loader">Loading</div>
+          </div>
+        </div>
+      );
+    }
     return this.props.userDrawings.map((drawing, i) => {
       return (
         <div className="item" key={drawing._id}>
@@ -65,6 +74,7 @@ class DrawingsList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userDrawings: state.userDrawings,
+    isLoading: state.authentication.isLoading,
   };
 };
 

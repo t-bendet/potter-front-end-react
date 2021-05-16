@@ -46,7 +46,6 @@ class SignIn extends React.Component {
           <div class="ui active dimmer">
             <div class="ui text loader">Loading</div>
           </div>
-          <p></p>
         </div>
       );
     }
@@ -92,6 +91,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { signIn })(formWrapped);
-//TODO add logic to redirect from here if user logged in mapstatetoprops user
-//TODO password ******
-//TODO add delete user account

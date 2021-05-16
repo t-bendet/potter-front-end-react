@@ -10,11 +10,18 @@ class UserStatusBtn extends React.Component {
   onSignOutClick = async () => {
     this.props.signOut(this.props.token);
     history.push("/");
-    window.location.reload();
   };
   // renders sign in button if not signed in
   renderAuthButton() {
-    if (this.props.isSignedIn) {
+    if (this.props.isLoading) {
+      return (
+        <div class="ui segment">
+          <div class="ui active dimmer">
+            <div class="ui text loader">Loading</div>
+          </div>
+        </div>
+      );
+    } else if (this.props.isSignedIn) {
       return (
         <div>
           <button onClick={this.onSignOutClick} className="ui red  button">
@@ -51,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     isSignedIn: state.authentication.isSignedIn,
     token: state.authentication.token,
+    isLoading: state.authentication.isLoading,
   };
 };
 

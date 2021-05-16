@@ -6,6 +6,7 @@ import {
   LOG_IN,
   USER_ERROR,
   USER_LOADING,
+  USER_LOADING_SUCCESS,
   REGISTER_USER,
   DELETE_USER,
   FETCH_USER_STORIES,
@@ -63,7 +64,6 @@ export const signIn = (formValues) => async (dispatch) => {
     const response = await axios.post(`${DB}/users/login`, formValues);
 
     dispatch({ type: SIGN_IN, payload: response.data });
-    console.log("still here");
   } catch (e) {
     console.log(e.message);
     dispatch({ type: USER_ERROR, payload: e });
@@ -101,23 +101,27 @@ export const deleteUser = (token) => async (dispatch) => {
 
 //**User Stories*/
 export const fetchUserStories = (token) => async (dispatch, getState) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .get(`${DB}/stories`)
       .set("Authorization", token);
     dispatch({ type: FETCH_USER_STORIES, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const createStory = (token, story) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .post(`${DB}/stories`)
       .set("Authorization", token)
       .send(story);
     dispatch({ type: CREATE_USER_STORY, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
@@ -125,23 +129,27 @@ export const createStory = (token, story) => async (dispatch) => {
 
 //TODO add a popup are you sure you want to delete
 export const deleteStory = (token, id) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .delete(`${DB}/stories/${id}`)
       .set("Authorization", token);
     dispatch({ type: DELETE_USER_STORY, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const editStory = (token, story, id) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .patch(`${DB}/stories/${id}`)
       .set("Authorization", token)
       .send(story);
     dispatch({ type: EDIT_USER_STORY, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
@@ -150,17 +158,20 @@ export const editStory = (token, story, id) => async (dispatch) => {
 //**User Drawings*/
 
 export const fetchUserDrawings = (token) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .get(`${DB}/drawings`)
       .set("Authorization", token);
     dispatch({ type: FETCH_USER_DRAWINGS, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const createDrawing = (token, drawing) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const body = {
       description: drawing.description,
@@ -175,23 +186,27 @@ export const createDrawing = (token, drawing) => async (dispatch) => {
       .send(formData);
     console.log(response);
     dispatch({ type: CREATE_USER_DRAWING, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const deleteDrawing = (token, id) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .delete(`${DB}/drawings/${id}`)
       .set("Authorization", token);
     dispatch({ type: DELETE_USER_DRAWING, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const editDrawing = (token, drawing, id) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const body = {
       description: drawing.description,
@@ -206,6 +221,7 @@ export const editDrawing = (token, drawing, id) => async (dispatch) => {
       .send(formData);
     console.log(response);
     dispatch({ type: EDIT_USER_DRAWING, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }

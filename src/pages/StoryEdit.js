@@ -35,7 +35,9 @@ class StoryEdit extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { userStories: state.userStories };
+  return {
+    userStories: state.userStories,
+  };
 };
 
 export default connect(mapStateToProps, { editStory })(StoryEdit);

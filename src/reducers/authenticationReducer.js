@@ -6,6 +6,7 @@ import {
   DELETE_USER,
   USER_LOADING,
   USER_ERROR,
+  USER_LOADING_SUCCESS,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -23,6 +24,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    case USER_LOADING_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
       };
     case LOG_IN:
       return {
