@@ -40,6 +40,16 @@ class SignIn extends React.Component {
   };
   //added class name error for semantic ui(otherwise error display is none)
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div class="ui segment">
+          <div class="ui active dimmer">
+            <div class="ui text loader">Loading</div>
+          </div>
+          <p></p>
+        </div>
+      );
+    }
     return (
       <form
         className="ui form error"
@@ -77,6 +87,7 @@ const mapStateToProps = (state) => {
   return {
     isSignedIn: state.authentication.isSignedIn,
     user: state.authentication.user,
+    isLoading: state.authentication.isLoading,
   };
 };
 

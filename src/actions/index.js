@@ -4,7 +4,8 @@ import {
   SIGN_IN,
   SIGN_OUT,
   LOG_IN,
-  SET_ERROR,
+  USER_ERROR,
+  USER_LOADING,
   REGISTER_USER,
   DELETE_USER,
   FETCH_USER_STORIES,
@@ -44,6 +45,7 @@ export const tryFetchMovie = (movie_id) => async (dispatch) => {
 //****************************************User Auth Actions******************************************** */
 
 export const validateUser = (token) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent
       .get(`${DB}/users/me`)
@@ -51,18 +53,20 @@ export const validateUser = (token) => async (dispatch) => {
     response.body.token = token;
     dispatch({ type: LOG_IN, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
 export const signIn = (formValues) => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
   try {
     const response = await axios.post(`${DB}/users/login`, formValues);
 
     dispatch({ type: SIGN_IN, payload: response.data });
+    console.log("still here");
   } catch (e) {
     console.log(e.message);
-    dispatch({ type: SET_ERROR, payload: e });
+    dispatch({ type: USER_ERROR, payload: e });
   }
 };
 
@@ -71,7 +75,7 @@ export const signOut = (token) => async (dispatch) => {
     await superagent.post(`${DB}/users/logout`).set("Authorization", token);
     dispatch({ type: SIGN_OUT, payload: null });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -80,7 +84,7 @@ export const registerUser = (formValues) => async (dispatch) => {
     const response = await axios.post(`${DB}/users`, formValues);
     dispatch({ type: REGISTER_USER, payload: response.data });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -89,7 +93,7 @@ export const deleteUser = (token) => async (dispatch) => {
     await superagent.delete(`${DB}/users/me`).set("Authorization", token);
     dispatch({ type: DELETE_USER, payload: null });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -103,7 +107,7 @@ export const fetchUserStories = (token) => async (dispatch, getState) => {
       .set("Authorization", token);
     dispatch({ type: FETCH_USER_STORIES, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -115,7 +119,7 @@ export const createStory = (token, story) => async (dispatch) => {
       .send(story);
     dispatch({ type: CREATE_USER_STORY, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -127,7 +131,7 @@ export const deleteStory = (token, id) => async (dispatch) => {
       .set("Authorization", token);
     dispatch({ type: DELETE_USER_STORY, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -139,7 +143,7 @@ export const editStory = (token, story, id) => async (dispatch) => {
       .send(story);
     dispatch({ type: EDIT_USER_STORY, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -152,7 +156,7 @@ export const fetchUserDrawings = (token) => async (dispatch) => {
       .set("Authorization", token);
     dispatch({ type: FETCH_USER_DRAWINGS, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -172,7 +176,7 @@ export const createDrawing = (token, drawing) => async (dispatch) => {
     console.log(response);
     dispatch({ type: CREATE_USER_DRAWING, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -183,7 +187,7 @@ export const deleteDrawing = (token, id) => async (dispatch) => {
       .set("Authorization", token);
     dispatch({ type: DELETE_USER_DRAWING, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
 
@@ -203,6 +207,6 @@ export const editDrawing = (token, drawing, id) => async (dispatch) => {
     console.log(response);
     dispatch({ type: EDIT_USER_DRAWING, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
 };
