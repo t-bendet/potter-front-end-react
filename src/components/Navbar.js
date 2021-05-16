@@ -5,10 +5,7 @@ import UserStatusBtn from "./UserStatusBtn";
 class Navbar extends React.Component {
   render() {
     return (
-      <div
-        className="ui secondary pointing menu red"
-        style={{ backgroundColor: "white" }}
-      >
+      <div className="ui secondary pointing menu">
         <Link to="/" className="item">
           Home
         </Link>

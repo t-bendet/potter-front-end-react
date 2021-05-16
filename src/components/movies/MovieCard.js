@@ -22,7 +22,7 @@ const MovieCard = ({ data }) => {
       <h1>Movie Details</h1>
       <p>{data.title}</p>
       <p>
-        Novel writer :{data.credits.crew.find((e) => e.job === "Novel").name}
+        // Novel writer :{data.credits.crew.find((e) => e.job === "Novel").name}
       </p>
       <p>
         Original Music Composer:

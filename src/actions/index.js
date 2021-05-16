@@ -4,7 +4,6 @@ import {
   SIGN_IN,
   SIGN_OUT,
   LOG_IN,
-  FETCH_MOVIE,
   SET_ERROR,
   REGISTER_USER,
   DELETE_USER,
@@ -16,6 +15,9 @@ import {
   CREATE_USER_DRAWING,
   EDIT_USER_DRAWING,
   DELETE_USER_DRAWING,
+  FETCH_MOVIE_LOADING,
+  FETCH_MOVIE_SUCCESS,
+  FETCH_MOVIE_ERROR,
 } from "./types";
 import history from "../history";
 
@@ -24,15 +26,18 @@ const DB = "https://potter-back-end.herokuapp.com";
 
 //****************************************External Api Actions******************************************** */
 
-//
-export const fetchMovie = (movie_id) => async (dispatch) => {
+export const tryFetchMovie = (movie_id) => async (dispatch) => {
+  dispatch({ type: FETCH_MOVIE_LOADING, payload: movie_id });
   try {
     const response = await superagent.get(
       `${tmdb}/3/movie/${movie_id}?api_key=4d262ae50666747fc7d632e52cc56d65&append_to_response=videos,credits`
     );
-    dispatch({ type: FETCH_MOVIE, payload: response.body });
+    dispatch({ type: FETCH_MOVIE_SUCCESS, payload: response.body });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    dispatch({
+      type: FETCH_MOVIE_ERROR,
+      payload: { id: movie_id, error: e.message },
+    });
   }
 };
 
@@ -53,9 +58,11 @@ export const validateUser = (token) => async (dispatch) => {
 export const signIn = (formValues) => async (dispatch) => {
   try {
     const response = await axios.post(`${DB}/users/login`, formValues);
+
     dispatch({ type: SIGN_IN, payload: response.data });
   } catch (e) {
-    dispatch({ type: SET_ERROR, payload: e.message });
+    console.log(e.message);
+    dispatch({ type: SET_ERROR, payload: e });
   }
 };
 
