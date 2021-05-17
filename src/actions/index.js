@@ -25,6 +25,7 @@ import history from "../history";
 
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
+//const DB = "http://localhost:3001"
 
 //****************************************External Api Actions******************************************** */
 
@@ -53,6 +54,7 @@ export const validateUser = (token) => async (dispatch) => {
       .set("Authorization", token);
     response.body.token = token;
     dispatch({ type: LOG_IN, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
@@ -64,6 +66,7 @@ export const signIn = (formValues) => async (dispatch) => {
     const response = await axios.post(`${DB}/users/login`, formValues);
 
     dispatch({ type: SIGN_IN, payload: response.data });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     console.log(e.message);
     dispatch({ type: USER_ERROR, payload: e });
@@ -74,6 +77,7 @@ export const signOut = (token) => async (dispatch) => {
   try {
     await superagent.post(`${DB}/users/logout`).set("Authorization", token);
     dispatch({ type: SIGN_OUT, payload: null });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
@@ -83,6 +87,7 @@ export const registerUser = (formValues) => async (dispatch) => {
   try {
     const response = await axios.post(`${DB}/users`, formValues);
     dispatch({ type: REGISTER_USER, payload: response.data });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }
@@ -92,6 +97,7 @@ export const deleteUser = (token) => async (dispatch) => {
   try {
     await superagent.delete(`${DB}/users/me`).set("Authorization", token);
     dispatch({ type: DELETE_USER, payload: null });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
   }

@@ -36,7 +36,6 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: true,
         user: action.payload,
         token: action.payload.token,
-        isLoading: false,
       };
     case SIGN_IN:
       return {
@@ -44,7 +43,6 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: true,
         user: action.payload.user,
         token: action.payload.token,
-        isLoading: false,
       };
     case SIGN_OUT:
       return {
@@ -52,7 +50,6 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: false,
         user: null,
         token: null,
-        isLoading: false,
       };
     case REGISTER_USER:
       return {
@@ -60,7 +57,6 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: true,
         user: action.payload.user,
         token: action.payload.token,
-        isLoading: false,
       };
     case DELETE_USER:
       return {
@@ -68,7 +64,6 @@ export default (state = INITIAL_STATE, action) => {
         isSignedIn: false,
         user: null,
         token: null,
-        isLoading: false,
       };
     case USER_ERROR:
       return {
