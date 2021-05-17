@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editDrawing } from "../actions";
-import DrawingForm from "../components/forms/DrawingForm";
-import { getCookie } from "../utils/cookies";
+import { editDrawing } from "../../actions";
+import DrawingForm from "./DrawingForm";
+import { getCookie } from "../../utils/cookies";
 
 class DrawingEdit extends React.Component {
   renderInitValues() {

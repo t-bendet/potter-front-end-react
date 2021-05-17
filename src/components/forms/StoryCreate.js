@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createStory } from "../actions/";
-import StoryForm from "../components/forms/StoryForm";
-import { getCookie } from "../utils/cookies";
+import { createStory } from "../../actions";
+import StoryForm from "./StoryForm";
+import { getCookie } from "../../utils/cookies";
 
 //TODO add navigation and pop up after creating a new story
 

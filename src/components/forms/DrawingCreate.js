@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDrawing } from "../actions/";
-import DrawingForm from "../components/forms/DrawingForm";
-import { getCookie } from "../utils/cookies";
+import { createDrawing } from "../../actions";
+import DrawingForm from "./DrawingForm";
+import { getCookie } from "../../utils/cookies";
 
 class DrawingCreate extends React.Component {
   onSubmit = (formValues) => {

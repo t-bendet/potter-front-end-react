@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editStory } from "../actions";
-import StoryForm from "../components/forms/StoryForm";
-import { getCookie } from "../utils/cookies";
+import { editStory } from "../../actions";
+import StoryForm from "./StoryForm";
+import { getCookie } from "../../utils/cookies";
 
 class StoryEdit extends React.Component {
   renderInitValues() {

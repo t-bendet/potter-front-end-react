@@ -63,6 +63,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { signOut })(UserStatusBtn);
-
-//TODO change isSignedIn === null to a spinner
-//TODO add try catch to all
