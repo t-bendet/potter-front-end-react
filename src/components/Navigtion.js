@@ -1,21 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import UserStatusBtn from "./UserStatusBtn";
-import { createMedia } from "@artsy/fresnel";
 import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
-import { render } from "react-dom";
 import HP1 from "../imagesTesting/HP1.jpg";
 
-const AppMedia = createMedia({
-  breakpoints: {
-    mobile: 320,
-    tablet: 768,
-    computer: 992,
-    largeScreen: 1200,
-  },
-});
-const mediaStyles = AppMedia.createMediaStyle();
-const { Media, MediaContextProvider } = AppMedia;
+import { Media } from "../utils/mediaTest";
 
 const NavBarMobile = (props) => {
   const { children, leftItems, onPusherClick, onToggle, rightItems, visible } =
@@ -94,6 +82,8 @@ class NavBar extends React.Component {
   render() {
     const { children, leftItems, rightItems } = this.props;
     const { visible } = this.state;
+    console.log(this.state, "state");
+    console.log(this.props, "props");
 
     return (
       <div>
@@ -131,11 +121,7 @@ const rightItems = [
 
 const Navigtion = () => (
   <>
-    <style>{mediaStyles}</style>
-
-    <MediaContextProvider>
-      <NavBar leftItems={leftItems} rightItems={rightItems} />
-    </MediaContextProvider>
+    <NavBar leftItems={leftItems} rightItems={rightItems} />
   </>
 );
 

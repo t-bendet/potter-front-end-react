@@ -1,18 +1,20 @@
 import React from "react";
+import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>this is where the title will be</div>
-        <div>i am a carousel waiting to happen</div>
-        <div>i am a carousel waiting to happen</div>
-        <div>i am a carousel waiting to happen</div>
-        <div>i am a carousel waiting to happen</div>
-        <footer>i am a proud footer</footer>
-      </div>
-    );
-  }
-}
+import { Media } from "../utils/mediaTest";
+
+const Home = () => {
+  return (
+    <>
+      <Media at="mobile">
+        <h2>ss</h2>
+      </Media>
+
+      <Media greaterThan="mobile">
+        <h2>sssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
+      </Media>
+    </>
+  );
+};
 
 export default Home;

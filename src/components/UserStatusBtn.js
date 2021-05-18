@@ -14,6 +14,7 @@ class UserStatusBtn extends React.Component {
     this.props.signOut(this.props.token);
     history.push("/");
   };
+
   // renders sign in button if not signed in
   renderAuthButton() {
     if (this.props.isLoading) {

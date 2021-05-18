@@ -21,6 +21,8 @@ import { validateUser } from "./actions";
 import history from "./history";
 //TODO add logic to prevent sending a request to the server on each mount
 import "./styles/app.css";
+import { MediaContextProvider } from "./utils/mediaTest";
+
 class App extends React.Component {
   //if a cookie exists in local and no user is signed in,try to validate user
   componentDidMount() {
@@ -39,39 +41,45 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Router history={history}>
-          <Navigtion />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/books" component={Books} />
-            <Route exact path="/movies" component={Movies} />
-            <Route exact path="/games" component={Games} />
-            <Route exact path="/potter-Api" component={PotterApi} />
+        <MediaContextProvider>
+          <Router history={history}>
+            <Navigtion />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/books" component={Books} />
+              <Route exact path="/movies" component={Movies} />
+              <Route exact path="/games" component={Games} />
+              <Route exact path="/potter-Api" component={PotterApi} />
 
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/signIn" component={SignIn} />
-            <Route exact path="/fans-art" component={FansArt} />
-            <ProtectedRoute exact path="/userPage" component={UserPage} />
-            <ProtectedRoute exact path="/stories/new" component={StoryCreate} />
-            <ProtectedRoute
-              exact
-              path="/stories/edit/:id"
-              component={StoryEdit}
-            />
-            <ProtectedRoute
-              exact
-              path="/drawings/new"
-              component={DrawingCreate}
-            />
-            <ProtectedRoute
-              exact
-              path="/drawings/edit/:id"
-              component={DrawingEdit}
-            />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/signIn" component={SignIn} />
+              <Route exact path="/fans-art" component={FansArt} />
+              <ProtectedRoute exact path="/userPage" component={UserPage} />
+              <ProtectedRoute
+                exact
+                path="/stories/new"
+                component={StoryCreate}
+              />
+              <ProtectedRoute
+                exact
+                path="/stories/edit/:id"
+                component={StoryEdit}
+              />
+              <ProtectedRoute
+                exact
+                path="/drawings/new"
+                component={DrawingCreate}
+              />
+              <ProtectedRoute
+                exact
+                path="/drawings/edit/:id"
+                component={DrawingEdit}
+              />
 
-            <Route path="*" component={() => "404 NOT FOUND"} />
-          </Switch>
-        </Router>
+              <Route path="*" component={() => "404 NOT FOUND"} />
+            </Switch>
+          </Router>
+        </MediaContextProvider>
       </div>
     );
   }
