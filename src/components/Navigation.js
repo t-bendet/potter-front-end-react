@@ -1,7 +1,7 @@
 import React from "react";
 import UserStatusBtn from "./UserStatusBtn";
 import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
-import HP1 from "../imagesTesting/HP1.jpg";
+import HP1 from "../images/HP1.jpg";
 
 const NavBarDesktop = ({ leftItems }) => {
   return (

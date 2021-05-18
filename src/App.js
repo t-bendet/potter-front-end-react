@@ -73,8 +73,6 @@ class App extends React.Component {
                 path="/drawings/edit/:id"
                 component={DrawingEdit}
               />
-
-              <Route path="*" component={() => "404 NOT FOUND"} />
             </Test>
           </Switch>
         </Router>

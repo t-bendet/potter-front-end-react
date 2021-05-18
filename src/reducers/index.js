@@ -5,6 +5,7 @@ import userStoriesReducer from "./userStoriesReducer";
 import userDrawingsReducer from "./userDrawingsReducer";
 import { reducer as formReducer } from "redux-form";
 import fansArtReducer from "./fansArtReducer";
+import booksReducer from "./booksReducer";
 
 export default combineReducers({
   movies: moviesReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   userStories: userStoriesReducer,
   userDrawings: userDrawingsReducer,
   fansArt: fansArtReducer,
+  books: booksReducer,
 });

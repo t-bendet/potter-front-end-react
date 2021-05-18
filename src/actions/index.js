@@ -22,14 +22,31 @@ import {
   FETCH_MOVIE_ERROR,
   FETCH_ALL_USERS_STORIES,
   FETCH_ALL_USERS_DRAWINGS,
+  FETCH_BOOKS_LOADING,
+  FETCH_BOOKS_SUCCESS,
+  FETCH_BOOKS_ERROR,
 } from "./types";
 import history from "../history";
 
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
+const API = "https://potter-crawler-api.herokuapp.com";
 //const DB = "http://localhost:3001"
 
 //****************************************External Api Actions******************************************** */
+
+export const tryFetchBooks = () => async (dispatch) => {
+  dispatch({ type: FETCH_BOOKS_LOADING });
+  try {
+    const response = await superagent.get(`${API}/books`);
+    dispatch({ type: FETCH_BOOKS_SUCCESS, payload: response.body.books });
+  } catch (e) {
+    dispatch({
+      type: FETCH_BOOKS_ERROR,
+      payload: { error: e.message },
+    });
+  }
+};
 
 export const tryFetchMovie = (movie_id) => async (dispatch) => {
   dispatch({ type: FETCH_MOVIE_LOADING, payload: movie_id });

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Icon, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { fetchAllUserDrawings, fetchAllUserStories } from "../actions";
-import HP1 from "../imagesTesting/HP1.jpg";
+import HP1 from "../images/HP1.jpg";
 
 class FansArt extends React.Component {
   componentDidMount() {
