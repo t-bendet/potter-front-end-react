@@ -8,7 +8,6 @@ const testConfig = {
       value: "#1f052e",
     },
     image: "",
-    position: "50% 50%",
     repeat: "no-repeat",
     size: "cover",
     opacity: 1,
@@ -76,7 +75,7 @@ const testConfig = {
         distance: 400,
         duration: 0.3,
         opacity: 1,
-        size: 4,
+        size: 2,
       },
       connect: {
         distance: 80,
@@ -457,6 +456,9 @@ class Test extends React.Component {
           init={this.particlesInit}
           loaded={this.particlesLoaded}
           options={testConfig}
+          width="100%"
+          height="100%"
+          style={{ position: "relative", maxWidth: "100%" }}
         />
         {this.props.children}
       </div>

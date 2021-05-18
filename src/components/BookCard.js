@@ -1,6 +1,5 @@
 import React from "react";
 import HP1 from "../imagesTesting/HP1.jpg";
-import ReactCardFlip from "react-card-flip";
 
 const data = {
   Book_Name: "Philosopher's Stone",
@@ -16,27 +15,9 @@ const data = {
 };
 
 class BookCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isFlipped: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
-  }
-
   render() {
     return (
-      <ReactCardFlip
-        isFlipped={this.state.isFlipped}
-        flipDirection="horizontal"
-        flipSpeedBackToFront="1.5"
-        flipSpeedFrontToBack="1.5"
-      >
+      <div>
         <div className="ui image">
           <img src={HP1}></img>
           <button
@@ -68,7 +49,7 @@ class BookCard extends React.Component {
             Click to flip
           </button>
         </div>
-      </ReactCardFlip>
+      </div>
     );
   }
 }

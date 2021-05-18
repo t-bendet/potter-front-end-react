@@ -19,10 +19,8 @@ class UserStatusBtn extends React.Component {
   renderAuthButton() {
     if (this.props.isLoading) {
       return (
-        <div class="ui segment">
-          <div class="ui active dimmer">
-            <div class="ui text loader">Loading</div>
-          </div>
+        <div>
+          <h1>loading</h1>
         </div>
       );
     } else if (this.props.isSignedIn) {

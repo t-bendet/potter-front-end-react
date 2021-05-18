@@ -1,10 +1,9 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import Navigtion from "./components/Navigtion";
+import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Movies from "./pages/Movies";
-import Games from "./pages/Games";
 import PotterApi from "./pages/PotterApi";
 import Register from "./components/forms/Register";
 import SignIn from "./components/forms/SignIn";
@@ -21,7 +20,7 @@ import { validateUser } from "./actions";
 import history from "./history";
 //TODO add logic to prevent sending a request to the server on each mount
 import "./styles/app.css";
-import { MediaContextProvider } from "./utils/mediaTest";
+import Test from "./test";
 
 class App extends React.Component {
   //if a cookie exists in local and no user is signed in,try to validate user
@@ -41,14 +40,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <MediaContextProvider>
-          <Router history={history}>
-            <Navigtion />
-            <Switch>
+        <Router history={history}>
+          <Navigation />
+          <Switch>
+            <Test>
               <Route exact path="/" component={Home} />
               <Route exact path="/books" component={Books} />
               <Route exact path="/movies" component={Movies} />
-              <Route exact path="/games" component={Games} />
               <Route exact path="/potter-Api" component={PotterApi} />
 
               <Route exact path="/register" component={Register} />
@@ -77,9 +75,9 @@ class App extends React.Component {
               />
 
               <Route path="*" component={() => "404 NOT FOUND"} />
-            </Switch>
-          </Router>
-        </MediaContextProvider>
+            </Test>
+          </Switch>
+        </Router>
       </div>
     );
   }
