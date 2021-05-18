@@ -1,54 +1,70 @@
 import React from "react";
 import { connect } from "react-redux";
-import { tryFetchMovie } from "../actions";
+import { tryFetchMovie, selectMovie } from "../actions";
 import MovieCard from "../components/MovieCard";
+import { Container, Header, Grid, Image } from "semantic-ui-react";
 
 //TODO where to start?!?!?
-//useMemo?
+const image_base_url = `https://image.tmdb.org/t/p/original/`;
+
 class Movies extends React.Component {
   componentDidMount() {
-    this.props.tryFetchMovie("671");
-    this.props.tryFetchMovie("672");
-    this.props.tryFetchMovie("673");
-    this.props.tryFetchMovie("674");
-    this.props.tryFetchMovie("675");
-    this.props.tryFetchMovie("767");
-    this.props.tryFetchMovie("12444");
-    this.props.tryFetchMovie("12445");
-    this.props.tryFetchMovie("259316");
+    const { tryFetchMovie } = this.props;
+    tryFetchMovie("671");
+    tryFetchMovie("672");
+    tryFetchMovie("673");
+    tryFetchMovie("674");
+    tryFetchMovie("675");
+    tryFetchMovie("767");
+    tryFetchMovie("12444");
+    tryFetchMovie("12445");
+    tryFetchMovie("259316");
   }
-  renderMovies() {
-    return this.props.movies.map((movie, i) => {
-      if (!movie.loading && !movie.error) {
-        return <MovieCard data={movie.data} />;
-      }
-      if (movie.error) {
-        console.log(movie.error);
-        return <h1>{JSON.parse(movie.error).status_message}</h1>;
-      }
-
+  renderMoviesList() {
+    const { movies, selectMovie } = this.props;
+    return movies.map((movie, i) => {
       return (
-        <div class="ui segment">
-          <div class="ui active dimmer">
-            <div class="ui text loader">Loading</div>
-          </div>
-          <p></p>
-        </div>
+        <Grid.Column key={i}>
+          <Image
+            style={{ maxHeight: "100px", maxWidth: "100px" }}
+            alt="poster"
+            src={`${image_base_url}${movie.data.poster_path}`}
+          />
+          <button
+            onClick={() => selectMovie(movie)}
+            className="ui button primary"
+          >
+            Select
+          </button>
+          <p>{movie.data.title}</p>
+        </Grid.Column>
       );
     });
   }
+
   render() {
+    const { isLoading, error, movies, selectedMovie } = this.props;
+
     return (
-      <div>
-        <h1>testing</h1>
-        {this.renderMovies()}
-      </div>
+      <Container>
+        <Grid columns={9} divided>
+          <Grid.Row>
+            {isLoading || error || movies.length < 8 || this.renderMoviesList()}
+          </Grid.Row>
+        </Grid>
+        {selectedMovie && <MovieCard data={selectedMovie} />}
+      </Container>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { movies: Object.values(state.movies) };
+  return {
+    movies: Object.values(state.movies),
+    selectedMovie: state.selectedMovie,
+    isLoading: state.authentication.isLoading,
+    error: state.authentication.error,
+  };
 };
 
-export default connect(mapStateToProps, { tryFetchMovie })(Movies);
+export default connect(mapStateToProps, { tryFetchMovie, selectMovie })(Movies);

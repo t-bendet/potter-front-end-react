@@ -17,14 +17,13 @@ import {
   CREATE_USER_DRAWING,
   EDIT_USER_DRAWING,
   DELETE_USER_DRAWING,
-  FETCH_MOVIE_LOADING,
   FETCH_MOVIE_SUCCESS,
-  FETCH_MOVIE_ERROR,
   FETCH_ALL_USERS_STORIES,
   FETCH_ALL_USERS_DRAWINGS,
   FETCH_BOOKS_LOADING,
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_ERROR,
+  MOVIE_SELECTED,
 } from "./types";
 import history from "../history";
 
@@ -49,18 +48,23 @@ export const tryFetchBooks = () => async (dispatch) => {
 };
 
 export const tryFetchMovie = (movie_id) => async (dispatch) => {
-  dispatch({ type: FETCH_MOVIE_LOADING, payload: movie_id });
+  dispatch({ type: USER_LOADING });
   try {
     const response = await superagent.get(
       `${tmdb}/3/movie/${movie_id}?api_key=4d262ae50666747fc7d632e52cc56d65&append_to_response=videos,credits`
     );
     dispatch({ type: FETCH_MOVIE_SUCCESS, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
-    dispatch({
-      type: FETCH_MOVIE_ERROR,
-      payload: { id: movie_id, error: e.message },
-    });
+    dispatch({ type: USER_ERROR, payload: e.message });
   }
+};
+
+export const selectMovie = (movie) => {
+  return {
+    type: MOVIE_SELECTED,
+    payload: movie.data,
+  };
 };
 
 //****************************************User Auth Actions******************************************** */
