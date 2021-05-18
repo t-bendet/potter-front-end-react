@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navigtion from "./components/Navigtion";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Movies from "./pages/Movies";
@@ -14,12 +14,13 @@ import StoryEdit from "./components/forms/StoryEdit";
 import DrawingCreate from "./components/forms/DrawingCreate";
 import DrawingEdit from "./components/forms/DrawingEdit";
 import ProtectedRoute from "./components/ProtectedRoute";
+import FansArt from "./pages/FansArt";
 import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
 import { validateUser } from "./actions";
 import history from "./history";
-
 //TODO add logic to prevent sending a request to the server on each mount
+import "./styles/app.css";
 class App extends React.Component {
   //if a cookie exists in local and no user is signed in,try to validate user
   componentDidMount() {
@@ -37,9 +38,9 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="ui container">
+      <div className="app">
         <Router history={history}>
-          <Navbar />
+          <Navigtion />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/books" component={Books} />
@@ -49,7 +50,7 @@ class App extends React.Component {
 
             <Route exact path="/register" component={Register} />
             <Route exact path="/signIn" component={SignIn} />
-
+            <Route exact path="/fans-art" component={FansArt} />
             <ProtectedRoute exact path="/userPage" component={UserPage} />
             <ProtectedRoute exact path="/stories/new" component={StoryCreate} />
             <ProtectedRoute

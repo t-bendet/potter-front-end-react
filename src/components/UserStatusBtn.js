@@ -4,7 +4,10 @@ import { signOut } from "../actions";
 import { Link } from "react-router-dom";
 import history from "../history";
 
+import { Menu } from "semantic-ui-react";
+
 //TODO add msg on sign out
+//TODO change dimmer
 
 class UserStatusBtn extends React.Component {
   onSignOutClick = async () => {
@@ -23,34 +26,37 @@ class UserStatusBtn extends React.Component {
       );
     } else if (this.props.isSignedIn) {
       return (
-        <div>
-          <button onClick={this.onSignOutClick} className="ui red  button">
-            <i className="icon sign out alternate"></i>
-            Sign Out
-          </button>
-          <Link to="/userPage" className="ui green  button">
-            <i className="icon user"></i>
-            Your Account
-          </Link>
-        </div>
+        <>
+          <Menu.Item
+            as="a"
+            content="Sign Out"
+            key="Sign Out"
+            onClick={this.onSignOutClick}
+          />
+          <Menu.Item
+            as="a"
+            content="Your Account"
+            key="Your Account"
+            href="/userPage"
+          />
+        </>
       );
     } else {
       return (
-        <div>
-          <Link to="/signIn" className="ui green  button">
-            <i className="icon"></i>
-            Sign In
-          </Link>
-          <Link to="/register" className="ui green  button">
-            <i className="icon registered outline"></i>
-            Register
-          </Link>
-        </div>
+        <>
+          <Menu.Item as="a" content="Sign In" key="Sign In" href="/signIn" />
+          <Menu.Item
+            as="a"
+            content="Register"
+            key="register"
+            href="/register"
+          />
+        </>
       );
     }
   }
   render() {
-    return <div>{this.renderAuthButton()}</div>;
+    return <>{this.renderAuthButton()}</>;
   }
 }
 

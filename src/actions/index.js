@@ -20,6 +20,8 @@ import {
   FETCH_MOVIE_LOADING,
   FETCH_MOVIE_SUCCESS,
   FETCH_MOVIE_ERROR,
+  FETCH_ALL_USERS_STORIES,
+  FETCH_ALL_USERS_DRAWINGS,
 } from "./types";
 import history from "../history";
 
@@ -227,6 +229,30 @@ export const editDrawing = (token, drawing, id) => async (dispatch) => {
       .send(formData);
     console.log(response);
     dispatch({ type: EDIT_USER_DRAWING, payload: response.body });
+    dispatch({ type: USER_LOADING_SUCCESS });
+  } catch (e) {
+    dispatch({ type: USER_ERROR, payload: e.message });
+  }
+};
+
+export const fetchAllUserStories = () => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
+  try {
+    const response = await superagent.get(`${DB}/admin/Stories`);
+    dispatch({ type: FETCH_ALL_USERS_STORIES, payload: response.body });
+
+    dispatch({ type: USER_LOADING_SUCCESS });
+  } catch (e) {
+    dispatch({ type: USER_ERROR, payload: e.message });
+  }
+};
+
+export const fetchAllUserDrawings = () => async (dispatch) => {
+  dispatch({ type: USER_LOADING });
+  try {
+    const response = await superagent.get(`${DB}/admin/drawings`);
+    dispatch({ type: FETCH_ALL_USERS_DRAWINGS, payload: response.body });
+
     dispatch({ type: USER_LOADING_SUCCESS });
   } catch (e) {
     dispatch({ type: USER_ERROR, payload: e.message });
