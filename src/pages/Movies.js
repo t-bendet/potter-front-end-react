@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { tryFetchMovie, selectMovie } from "../actions";
 import MovieCard from "../components/MovieCard";
-import { Container, Header, Grid, Image } from "semantic-ui-react";
+import { Container, Icon, Grid, Image, Button } from "semantic-ui-react";
 
 //TODO where to start?!?!?
 const image_base_url = `https://image.tmdb.org/t/p/original/`;
@@ -30,12 +30,11 @@ class Movies extends React.Component {
             alt="poster"
             src={`${image_base_url}${movie.data.poster_path}`}
           />
-          <button
-            onClick={() => selectMovie(movie)}
-            className="ui button primary"
-          >
+          <Button icon onClick={() => selectMovie(movie)}>
+            <Icon name="film" />
             Select
-          </button>
+          </Button>
+
           <p>{movie.data.title}</p>
         </Grid.Column>
       );
