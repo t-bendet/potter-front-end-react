@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { tryFetchBooks } from "../actions/index";
-import { Container, Header } from "semantic-ui-react";
+import { Container, Header, Image } from "semantic-ui-react";
 import "../styles/books.css";
 import {
   HP1,
@@ -29,7 +29,11 @@ class Books extends React.Component {
       return (
         <a className="card" key={book}>
           <div className="front">
-            <img src={arr[i]}></img>
+            <Image
+              style={{ maxHeight: "300px", maxWidth: "300px" }}
+              alt="poster"
+              src={arr[i]}
+            />
           </div>
           <div className="back">
             <div>

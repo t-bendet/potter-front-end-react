@@ -1,13 +1,11 @@
 import React from "react";
-import ReactPlayer from "react-player/youtube";
+import { Embed } from "semantic-ui-react";
 
 const image_base_url = `https://image.tmdb.org/t/p/original/`;
 
-const youtube_base_url = `https://www.youtube.com/watch?v=`;
-
 const MovieCard = ({ data }) => {
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <h1>{data.title}</h1>
       <p>{data.tagline}</p>
       <p>{data.overview}</p>
@@ -60,13 +58,16 @@ const MovieCard = ({ data }) => {
       <p>character : {data.credits.cast[0].character}</p>
       <p>vote_average : {data.vote_average}</p>
       <p>vote_count : {data.vote_count}</p>
-      <ReactPlayer url={`${youtube_base_url}${data.videos.results[0].key}`} />
+      <Embed
+        id={`${data.videos.results[0].key}`}
+        source="youtube"
+        autoplay={false}
+      />
     </div>
   );
 };
 export default MovieCard;
 //**********info */
-
 //title - string
 //overview - string
 //tagline -string
