@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { tryFetchMovie, selectMovie } from "../actions";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "../components/movies/MovieCard";
 import { Container, Icon, Grid, Image, Button } from "semantic-ui-react";
 
-//TODO where to start?!?!?
+//TODO change postr to background and move table up
 const image_base_url = `https://image.tmdb.org/t/p/original/`;
 
 class Movies extends React.Component {
@@ -51,6 +51,7 @@ class Movies extends React.Component {
             {isLoading || error || movies.length < 8 || this.renderMoviesList()}
           </Grid.Row>
         </Grid>
+
         {selectedMovie && <MovieCard data={selectedMovie} />}
       </Container>
     );
@@ -67,3 +68,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { tryFetchMovie, selectMovie })(Movies);
+
+//
