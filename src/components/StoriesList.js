@@ -24,8 +24,11 @@ class StoriesList extends React.Component {
           <div className="right floated content">
             <Link
               to={`/stories/edit/${story._id}`}
-              className="ui button primary"
+              edit
+              className="ui button circular
+              "
             >
+              <i className="icon edit" />
               Edit
             </Link>
             <button

@@ -1,6 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-
+import { Form, Container } from "semantic-ui-react";
+// <Form.TextArea label='About' placeholder='Tell us more about you...' />
 class StoryForm extends React.Component {
   renderError({ error, touched }) {
     if (touched && error) {
@@ -28,18 +29,34 @@ class StoryForm extends React.Component {
 
   render() {
     return (
-      <form
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-        className="ui form error"
+      <Container
+        textAlign="center"
+        style={{
+          background: "white",
+          padding: "2rem 3rem",
+          borderRadius: "7px",
+        }}
       >
-        <Field name="title" component={this.renderInput} label="Enter Title" />
-        <Field
-          name="body"
-          component={this.renderInput}
-          label="Enter Story Body"
-        />
-        <button className="ui button primary">Submit</button>
-      </form>
+        <form
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          className="ui form error"
+        >
+          <Field
+            name="title"
+            component={this.renderInput}
+            label="Enter Title"
+          />
+          <br />
+          <br />
+          <br />
+          <Field
+            name="body"
+            component={this.renderInput}
+            label="Enter Story Body"
+          />
+          <button className="ui button primary">Submit</button>
+        </form>
+      </Container>
     );
   }
 }
