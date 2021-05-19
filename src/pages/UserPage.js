@@ -4,7 +4,15 @@ import { deleteUser } from "../actions";
 import { removeCookie, getCookie } from "../utils/cookies";
 import StoriesList from "../components/StoriesList";
 import DrawingsList from "../components/DrawingsList";
-//TODO improve programmatic navigation
+import {
+  Container,
+  Icon,
+  Grid,
+  Image,
+  Button,
+  Header,
+  Segment,
+} from "semantic-ui-react";
 
 class UserPage extends React.Component {
   onDeleteClick = () => {
@@ -13,15 +21,28 @@ class UserPage extends React.Component {
   };
   render() {
     return (
-      <div>
-        <h1>UserPage</h1>
-        <StoriesList />
-        <DrawingsList />
-        <button onClick={this.onDeleteClick} className="ui red  button">
-          <i className="icon sign out alternate"></i>
+      <Container text>
+        <Segment tertiary>
+          <Header textAlign="center" as="h1">
+            UserPage
+          </Header>
+        </Segment>
+        <Segment>
+          <StoriesList />
+        </Segment>
+        <Segment>
+          <DrawingsList />
+        </Segment>
+        <Button
+          style={{ marginBottom: "2rem" }}
+          onClick={this.onDeleteClick}
+          icon
+          className="red"
+        >
           DELETE USER
-        </button>
-      </div>
+          <Icon name="user delete" />
+        </Button>
+      </Container>
     );
   }
 }

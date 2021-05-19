@@ -4,22 +4,6 @@
   box-sizing: border-box;
 }
 
-/* html {
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 300;
-  color: #333;
-  font-family: "Nunito Sans", sans-serif;
-} */
-
-/* body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background-color: #ecf0f9;
-  background-attachment: fixed;
-} */
-
 .content {
   display: flex;
   margin: 0 auto;
@@ -99,7 +83,6 @@
 
 .front {
   background-size: cover;
-  padding: 2rem;
   font-size: 1.618rem;
   font-weight: 600;
   color: #fff;
@@ -116,7 +99,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #1a9be6, #1a57e6);
   opacity: 0.25;
   z-index: -1;
 }
@@ -131,6 +113,7 @@
   background: #fff;
   transform: rotateY(-180deg);
   padding: 0 2em;
+  margin-top: 1em;
 }
 .back .button {
   background: linear-gradient(135deg, #1a9be6, #1a57e6);
@@ -154,47 +137,4 @@
 }
 .card:nth-child(even):hover .back {
   transform: rotateY(0deg);
-}
-
-.button {
-  transform: translateZ(40px);
-  cursor: pointer;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  font-weight: bold;
-  color: #fff;
-  padding: 0.5em 1em;
-  border-radius: 100px;
-  font: inherit;
-  border: none;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: 300ms ease;
-}
-.button:before {
-  transition: 300ms ease;
-  position: absolute;
-  display: block;
-  content: "";
-  transform: translateZ(-40px);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  height: calc(100% - 20px);
-  width: calc(100% - 20px);
-  border-radius: 100px;
-  left: 10px;
-  top: 16px;
-}
-.button:hover {
-  transform: translateZ(55px);
-}
-.button:hover:before {
-  transform: translateZ(-55px);
-}
-.button:active {
-  transform: translateZ(20px);
-}
-.button:active:before {
-  transform: translateZ(-20px);
-  top: 12px;
 }

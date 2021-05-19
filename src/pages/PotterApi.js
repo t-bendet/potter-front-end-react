@@ -13,21 +13,22 @@ import {
 
 const PotterApi = () => {
   const [getRequest, setGetRequest] = useState("books");
+  const [data, setData] = useState(undefined);
   const fetchData = async () => {
     const response = await axios.get(
       `https://potter-crawler-api.herokuapp.com/${getRequest}`
     );
-    console.log(response.data);
+    setData(response.data);
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [data]);
 
   const test = () => {
-    console.log(getRequest);
+    fetchData();
   };
   return (
-    <Container style={{ backgroundColor: "red" }}>
+    <Container style={{ backgroundColor: "white" }}>
       <Form onSubmit={() => test()}>
         <Form.Field>
           <label>try it</label>
@@ -38,7 +39,7 @@ const PotterApi = () => {
             <Input
               type="text"
               placeholder="books"
-              action="Search"
+              action="Get"
               type="text"
               value={getRequest}
               onChange={(e) => setGetRequest(e.target.value)}
@@ -49,8 +50,10 @@ const PotterApi = () => {
       <Header as="h3">Result:</Header>
       <Grid>
         <Grid.Column>
-          <Segment>
-            <pre style={{ overflowX: "auto" }}>Json</pre>
+          <Segment style={{ maxHeight: "340px", overflowY: "scroll" }}>
+            <pre style={{ overflowX: "auto" }}>
+              {data && JSON.stringify(data, null, 2)}
+            </pre>
           </Segment>
         </Grid.Column>
       </Grid>
@@ -59,5 +62,3 @@ const PotterApi = () => {
 };
 
 export default PotterApi;
-// {JSON.stringify(source, null, 2)}
-// {JSON.stringify({ loading, results, value }, null, 2)}

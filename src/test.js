@@ -5,7 +5,7 @@ const testConfig = {
   autoPlay: true,
   background: {
     color: {
-      value: "#1f052e",
+      value: "#2c0751",
     },
     image: "",
     repeat: "no-repeat",

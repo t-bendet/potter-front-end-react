@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { tryFetchMovie, selectMovie } from "../actions";
 import MovieCard from "../components/movies/MovieCard";
-import { Container, Icon, Grid, Image, Button } from "semantic-ui-react";
+import { Container, Grid, Card, Icon, Image } from "semantic-ui-react";
 
 //TODO change postr to background and move table up
 const image_base_url = `https://image.tmdb.org/t/p/original/`;
@@ -24,18 +24,13 @@ class Movies extends React.Component {
     const { movies, selectMovie } = this.props;
     return movies.map((movie, i) => {
       return (
-        <Grid.Column key={i}>
+        <Grid.Column centered key={i}>
           <Image
-            style={{ maxHeight: "100px", maxWidth: "100px" }}
+            size="small"
             alt="poster"
             src={`${image_base_url}${movie.data.poster_path}`}
+            onClick={() => selectMovie(movie)}
           />
-          <Button icon onClick={() => selectMovie(movie)}>
-            <Icon name="film" />
-            Select
-          </Button>
-
-          <p>{movie.data.title}</p>
         </Grid.Column>
       );
     });
@@ -45,9 +40,9 @@ class Movies extends React.Component {
     const { isLoading, error, movies, selectedMovie } = this.props;
 
     return (
-      <Container>
+      <Container style={{ paddingBottom: "3rem", marginBottom: "1rem" }}>
         <Grid columns={9} divided>
-          <Grid.Row>
+          <Grid.Row style={{ paddingBottom: "1rem", marginBottom: "1rem" }}>
             {isLoading || error || movies.length < 8 || this.renderMoviesList()}
           </Grid.Row>
         </Grid>

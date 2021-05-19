@@ -14,7 +14,7 @@ const NavBarDesktop = ({ leftItems }) => {
         <Menu.Item {...item} />
       ))}
 
-      <Menu.Menu position="right">
+      <Menu.Menu position="right" style={{ marginRight: "1rem" }}>
         <UserStatusBtn />
       </Menu.Menu>
     </Menu>
@@ -39,9 +39,6 @@ const leftItems = [
   { as: "a", content: "Movies", key: "movies", href: "/movies" },
   { as: "a", content: "Potter Api", key: "potter-Api", href: "/potter-Api" },
   { as: "a", content: "Fans Art", key: "fans-art", href: "/fans-art" },
-];
-const rightItems = [
-  { as: "a", content: "UserStatusBtn", key: "UserStatusBtn" },
 ];
 
 const Navigation = () => (

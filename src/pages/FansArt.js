@@ -15,7 +15,7 @@ class FansArt extends React.Component {
     return (
       <div>
         <Card>
-          <Image src={HP1} wrapped ui={false} />
+          <Image src={HP1} size="small" wrapped />
           <Card.Content>
             <Card.Header>Matthew</Card.Header>
             <Card.Meta>

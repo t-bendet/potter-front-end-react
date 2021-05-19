@@ -27,7 +27,7 @@ class DrawingsList extends React.Component {
     return this.props.userDrawings.map((drawing, i) => {
       return (
         <div className="item" key={drawing._id}>
-          <i className="icon book" />
+          <i className="icon pencil alternate" />
           <div className="content">
             {drawing.title}
             <div className="description">{drawing.description}</div>
