@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUserDrawings, deleteDrawing } from "../actions";
-//, deleteDrawing
+import { Item, Image } from "semantic-ui-react";
+
 import { getCookie } from "../utils/cookies";
 //TODO refector render methods to components
 
@@ -15,27 +16,27 @@ class DrawingsList extends React.Component {
     this.props.deleteDrawing(getCookie("token"), id);
   };
   renderList() {
-    if (this.props.isLoading) {
-      return (
-        <div class="ui segment">
-          <div class="ui active dimmer">
-            <div class="ui text loader">Loading</div>
-          </div>
-        </div>
-      );
-    }
     return this.props.userDrawings.map((drawing, i) => {
       return (
-        <div className="item" key={drawing._id}>
+        <Item
+          key={drawing._id}
+          style={{
+            maxHeight: "220px",
+            overflowY: "scroll",
+            overflowX: "hidden",
+            margin: "2rem 1rem",
+          }}
+        >
           <i className="icon pencil alternate" />
-          <div className="content">
-            {drawing.title}
-            <div className="description">{drawing.description}</div>
-          </div>
+          <Item.Content>
+            <Item.Header>{drawing.title}</Item.Header>
+            <Item.Description>{drawing.description}</Item.Description>
+          </Item.Content>
+
           <div className="right floated content">
             <Link
               to={`/drawings/edit/${drawing._id}`}
-              className="ui button primary"
+              className="ui button circular"
             >
               Edit
             </Link>
@@ -49,10 +50,11 @@ class DrawingsList extends React.Component {
               Delete
             </button>
           </div>
-          <img
+          <Image
+            size="small"
             src={`https://potter-back-end.herokuapp.com/drawings/${drawing._id}`}
-          ></img>
-        </div>
+          ></Image>
+        </Item>
       );
     });
   }
@@ -62,7 +64,7 @@ class DrawingsList extends React.Component {
         <h2>DrawingsList</h2>
         <div className="ui celled list">{this.renderList()}</div>
         <div style={{ textAlign: "right" }}>
-          <Link to="/drawings/new" className="ui button primary">
+          <Link to="/drawings/new" className="ui button teal">
             Create Drawing
           </Link>
         </div>

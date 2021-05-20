@@ -7,7 +7,6 @@ import DrawingsList from "../components/DrawingsList";
 import {
   Container,
   Icon,
-  Grid,
   Image,
   Button,
   Header,
@@ -22,11 +21,7 @@ class UserPage extends React.Component {
   render() {
     return (
       <Container text>
-        <Segment tertiary>
-          <Header textAlign="center" as="h1">
-            UserPage
-          </Header>
-        </Segment>
+        <br />
         <Segment>
           <StoriesList />
         </Segment>

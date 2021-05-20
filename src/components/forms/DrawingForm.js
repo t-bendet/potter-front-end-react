@@ -1,5 +1,15 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import "../../styles/utility.css";
+import {
+  Form,
+  Container,
+  Button,
+  Image,
+  Segment,
+  Icon,
+  Header,
+} from "semantic-ui-react";
 
 class DrawingForm extends React.Component {
   renderError({ error, touched }) {
@@ -14,7 +24,7 @@ class DrawingForm extends React.Component {
 
   renderInput = ({ input, label, meta }) => {
     return (
-      <div>
+      <div className="basic-box">
         <label>{label}</label>
         <input {...input} />
         {this.renderError(meta)}
@@ -44,7 +54,7 @@ class DrawingForm extends React.Component {
   };
   renderFileInput = ({ input, type, meta, label }) => {
     return (
-      <div>
+      <div className="basic-box">
         <label>{label}</label>
         <input
           name={input.name}
@@ -62,10 +72,17 @@ class DrawingForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form
+      <Container
+        textAlign="center"
+        style={{
+          background: "white",
+          padding: "0 3rem",
+          borderRadius: "7px",
+        }}
+      >
+        <Form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
-          className="ui form error"
+          className="error"
         >
           <Field
             name="title"
@@ -83,15 +100,17 @@ class DrawingForm extends React.Component {
             label="imageFile"
             component={this.renderFileInput}
           />
-          <button className="ui button primary">Submit</button>
-        </form>
-        <div>
-          <img
-            className="preview-image"
-            style={{ height: "300px", objectFit: "cover" }}
-          ></img>
-        </div>
-      </div>
+          <Segment placeholder compact>
+            <Header icon>
+              <Icon name="pencil alternate" />
+              Drawing Preview
+            </Header>
+
+            <Image className="preview-image" size="small"></Image>
+          </Segment>
+          <Button className="primary ">Submit</Button>
+        </Form>
+      </Container>
     );
   }
 }

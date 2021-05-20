@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUserStories, deleteStory } from "../actions";
 import { getCookie } from "../utils/cookies";
-//TODO refector render methods to components
+import { Item } from "semantic-ui-react";
 // refactor story.body to show only first 10 words of each story
+
 class StoriesList extends React.Component {
   componentDidMount() {
     this.props.fetchUserStories(getCookie("token"));
@@ -15,18 +16,25 @@ class StoriesList extends React.Component {
   renderList() {
     return this.props.userStories.map((story, i) => {
       return (
-        <div className="item" key={story._id}>
+        <Item
+          key={story._id}
+          style={{
+            maxHeight: "220px",
+            overflowY: "scroll",
+            overflowX: "hidden",
+            margin: "2rem 1rem",
+          }}
+        >
           <i className="icon book" />
-          <div className="content">
-            {story.title}
-            <div className="description">{story.body}</div>
-          </div>
+          <Item.Content>
+            <Item.Header>{story.title}</Item.Header>
+            <Item.Description>{story.body}</Item.Description>
+          </Item.Content>
           <div className="right floated content">
             <Link
               to={`/stories/edit/${story._id}`}
               edit
-              className="ui button circular
-              "
+              className="ui button circular"
             >
               <i className="icon edit" />
               Edit
@@ -40,7 +48,7 @@ class StoriesList extends React.Component {
               Delete
             </button>
           </div>
-        </div>
+        </Item>
       );
     });
   }
@@ -50,7 +58,7 @@ class StoriesList extends React.Component {
         <h2>Stories List</h2>
         <div className="ui celled list">{this.renderList()}</div>
         <div style={{ textAlign: "right" }}>
-          <Link to="/stories/new" className="ui button primary">
+          <Link to="/stories/new" className="ui button   teal">
             Create Story
           </Link>
         </div>

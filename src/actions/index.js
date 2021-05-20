@@ -25,8 +25,6 @@ import {
   FETCH_BOOKS_ERROR,
   MOVIE_SELECTED,
 } from "./types";
-import history from "../history";
-
 const tmdb = "https://api.themoviedb.org";
 const DB = "https://potter-back-end.herokuapp.com";
 const API = "https://potter-crawler-api.herokuapp.com";
