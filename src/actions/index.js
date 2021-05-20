@@ -198,6 +198,7 @@ export const fetchUserDrawings = (token) => async (dispatch) => {
 };
 
 export const createDrawing = (token, drawing) => async (dispatch) => {
+  console.log(drawing);
   dispatch({ type: USER_LOADING });
   try {
     const body = {

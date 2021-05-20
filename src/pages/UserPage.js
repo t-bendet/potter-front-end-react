@@ -4,14 +4,7 @@ import { deleteUser } from "../actions";
 import { removeCookie, getCookie } from "../utils/cookies";
 import StoriesList from "../components/StoriesList";
 import DrawingsList from "../components/DrawingsList";
-import {
-  Container,
-  Icon,
-  Image,
-  Button,
-  Header,
-  Segment,
-} from "semantic-ui-react";
+import { Container, Icon, Button, Segment } from "semantic-ui-react";
 
 class UserPage extends React.Component {
   onDeleteClick = () => {

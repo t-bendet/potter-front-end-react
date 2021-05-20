@@ -3,6 +3,7 @@ import { Field, formValues, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { signIn } from "../../actions";
 import history from "../../history";
+import { Form, Container } from "semantic-ui-react";
 
 class SignIn extends React.Component {
   componentDidMount() {
@@ -40,28 +41,37 @@ class SignIn extends React.Component {
   };
   //added class name error for semantic ui(otherwise error display is none)
   render() {
-    if (this.props.isLoading) {
-      return (
-        <div class="ui segment">
-          <div class="ui active dimmer">
-            <div class="ui text loader">Loading</div>
-          </div>
-        </div>
-      );
-    }
     return (
-      <form
-        className="ui form error"
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
+      <Container
+        textAlign="center"
+        style={{
+          padding: "2rem 3rem",
+          borderRadius: "7px",
+          maxWidth: "300px",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        <Field name="email" component={this.renderInput} label={"email"} />
-        <Field
-          name="password"
-          component={this.renderInput}
-          label={"password"}
-        />
-        <button className="ui button primary">Sign In</button>
-      </form>
+        <Form
+          className="ui form error"
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          size="large"
+          style={{
+            background: "white",
+            padding: "2rem 3rem",
+            borderRadius: "7px",
+            maxWidth: "300px",
+          }}
+        >
+          <Field name="email" component={this.renderInput} label={"email"} />
+          <Field
+            name="password"
+            component={this.renderInput}
+            label={"password"}
+          />
+          <button className="ui button primary">Sign In</button>
+        </Form>
+      </Container>
     );
   }
 }
@@ -69,12 +79,13 @@ class SignIn extends React.Component {
 const validate = (formValues) => {
   const errors = {};
   if (!formValues.email) {
-    errors.email = "why no email?!?!?";
+    errors.email = "please enter a Email";
+  }
+  if (!formValues.password) {
+    errors.password = "please enter a Email password";
   }
 
-  if (!formValues.password) {
-    errors.password = "why no password?!?!?!";
-  }
+  return errors;
 };
 
 const formWrapped = reduxForm({

@@ -3,6 +3,7 @@ import { Field, formValues, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions"; // add logic to redirect from here if user logged in
 import history from "../../history";
+import { Form, Container } from "semantic-ui-react";
 
 class Register extends React.Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ class Register extends React.Component {
   }
   renderInput = ({ input, label, meta }) => {
     return (
-      <div className="field">
+      <div className="field ">
         <label> {label}</label>
         <input {...input} />
         {this.renderError(meta)}
@@ -42,20 +43,38 @@ class Register extends React.Component {
   //added class name error for semantic ui(otherwise error display is none)
   render() {
     return (
-      <form
-        className="ui form error"
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
+      <Container
+        textAlign="center"
+        style={{
+          padding: "2rem 3rem",
+          borderRadius: "7px",
+          maxWidth: "300px",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        <Field name="name" component={this.renderInput} label={"name"} />
-        <Field name="email" component={this.renderInput} label={"email"} />
-        <Field
-          name="password"
-          component={this.renderInput}
-          label={"password"}
-        />
+        <Form
+          className="error"
+          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          size="large"
+          style={{
+            background: "white",
+            padding: "2rem 3rem",
+            borderRadius: "7px",
+            maxWidth: "300px",
+          }}
+        >
+          <Field name="name" component={this.renderInput} label={"name"} />
+          <Field name="email" component={this.renderInput} label={"email"} />
+          <Field
+            name="password"
+            component={this.renderInput}
+            label={"password"}
+          />
 
-        <button className="ui button primary">Register</button>
-      </form>
+          <button className="ui button primary">Register</button>
+        </Form>
+      </Container>
     );
   }
 }
@@ -63,13 +82,13 @@ class Register extends React.Component {
 const validate = (formValues) => {
   const errors = {};
   if (!formValues.email) {
-    errors.email = "why no email?!?!?";
+    errors.email = "please enter a Email";
   }
   if (!formValues.password) {
-    errors.password = "why no password?!?!?!";
+    errors.password = "please enter a Email password";
   }
   if (!formValues.name) {
-    errors.password = "why no name?!?!?!";
+    errors.password = "please enter a name";
   }
   return errors;
 };

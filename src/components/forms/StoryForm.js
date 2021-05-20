@@ -49,6 +49,7 @@ class StoryForm extends React.Component {
         <Form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
           className="error"
+          size="large"
         >
           <Field
             name="title"

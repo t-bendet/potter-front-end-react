@@ -83,6 +83,7 @@ class DrawingForm extends React.Component {
         <Form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
           className="error"
+          size="large"
         >
           <Field
             name="title"
@@ -126,8 +127,8 @@ const validate = (formValues) => {
     errors.description = "You must enter description";
   }
 
-  if (formValues.imageFile && formValues.imageFile.size / 1024 > 1000) {
-    errors.imageFile = "size too big";
+  if (formValues.imageFile && formValues.imageFile.size / 1024 > 4000) {
+    errors.imageFile = "File size max limit is 4 MB";
   }
 
   return errors;
@@ -139,6 +140,3 @@ export default reduxForm({
 })(DrawingForm);
 
 //TODO add error in form submit for image type
-// if (formValues.imageFile && !formValues.imageFile.type.includes("image")) {
-//   errors.imageFile = "type no good";
-// }
