@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { tryFetchBooks } from "../actions/index";
-import { Container, Header, Image, Segment } from "semantic-ui-react";
+import { Container, Segment, Dimmer, Image, Loader } from "semantic-ui-react";
 import "../styles/books.css";
 import {
   HP1,
@@ -22,7 +22,18 @@ class Books extends React.Component {
   componentDidMount() {
     this.props.tryFetchBooks();
   }
+  renderLoad() {
+    return (
+      <Segment>
+        <Dimmer active>
+          <Loader size="medium">Loading</Loader>
+        </Dimmer>
 
+        <Image src="/images/wireframe/short-paragraph.png" />
+        <Image src="/images/wireframe/short-paragraph.png" />
+      </Segment>
+    );
+  }
   renderBooks() {
     const { books } = this.props;
     return books.map((book, i) => {
@@ -57,7 +68,7 @@ class Books extends React.Component {
     return (
       <Container>
         <div className="content">
-          {!isLoading && books && this.renderBooks()}
+          {!isLoading && books ? this.renderBooks() : this.renderLoad()}
         </div>
       </Container>
     );

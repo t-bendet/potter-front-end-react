@@ -18,6 +18,8 @@ import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
 import { validateUser } from "./actions";
 import history from "./history";
+import { Embed, Container } from "semantic-ui-react";
+
 //TODO add logic to prevent sending a request to the server on each mount
 import "./styles/app.css";
 import Test from "./test";
@@ -37,7 +39,9 @@ class App extends React.Component {
       removeCookie("token");
     }
   }
+
   render() {
+    const { isLoading } = this.props;
     return (
       <div className="app">
         <Router history={history}>
@@ -87,6 +91,7 @@ const mapStateToProps = (state) => {
     user: state.authentication.user,
     token: state.authentication.token,
     error: state.authentication.error,
+    isLoading: state.authentication.isLoading,
   };
 };
 

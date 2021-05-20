@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
-
+import { Container } from "semantic-ui-react";
+import "../styles/home.css";
 const Home = () => {
-  return <Container></Container>;
+  return <Container className="home"></Container>;
 };
 
 export default Home;

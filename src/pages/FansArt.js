@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Container, Segment } from "semantic-ui-react";
+import { Card, Image, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { fetchAllUserDrawings, fetchAllUserStories } from "../actions";
 

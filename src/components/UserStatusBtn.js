@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signOut } from "../actions";
-import { Link } from "react-router-dom";
 import history from "../history";
 
 import { Menu } from "semantic-ui-react";

@@ -4,8 +4,6 @@ import {
   Container,
   Form,
   Grid,
-  Image,
-  Button,
   Header,
   Input,
   Segment,
@@ -28,7 +26,9 @@ const PotterApi = () => {
     fetchData();
   };
   return (
-    <Container style={{ backgroundColor: "white" }}>
+    <Container
+      style={{ backgroundColor: "white", padding: "3rem", marginTop: "3rem" }}
+    >
       <Form onSubmit={() => test()}>
         <Form.Field>
           <label>try it</label>
@@ -47,7 +47,11 @@ const PotterApi = () => {
           </div>
         </Form.Field>
       </Form>
+      <Header as="h5">
+        Need a hint? try books/1 or potions or characters/harry potter
+      </Header>
       <Header as="h3">Result:</Header>
+
       <Grid>
         <Grid.Column>
           <Segment style={{ maxHeight: "340px", overflowY: "scroll" }}>
@@ -57,6 +61,16 @@ const PotterApi = () => {
           </Segment>
         </Grid.Column>
       </Grid>
+      <Header as="h5">
+        Docs:{" "}
+        <a
+          href="https://documenter.getpostman.com/view/14802064/TzRa7Pyi"
+          target="_blank"
+          rel="noreferrer"
+        >
+          For the full documentation
+        </a>
+      </Header>
     </Container>
   );
 };

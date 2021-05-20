@@ -1,13 +1,13 @@
 import React from "react";
 import UserStatusBtn from "./UserStatusBtn";
-import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
-import HP1 from "../images/HP1.jpg";
+import { Image, Menu } from "semantic-ui-react";
+import { me } from "../images";
 
 const NavBarDesktop = ({ leftItems }) => {
   return (
     <Menu stackable={true} inverted>
       <Menu.Item>
-        <Image size="mini" src={HP1} />
+        <Image size="mini" src={me} />
       </Menu.Item>
 
       {leftItems.map((item) => (
@@ -23,7 +23,7 @@ const NavBarDesktop = ({ leftItems }) => {
 
 class NavBar extends React.Component {
   render() {
-    const { children, leftItems } = this.props;
+    const { leftItems } = this.props;
 
     return (
       <div>

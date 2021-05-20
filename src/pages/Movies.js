@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { tryFetchMovie, selectMovie } from "../actions";
 import MovieCard from "../components/movies/MovieCard";
-import { Container, Grid, Card, Icon, Image } from "semantic-ui-react";
+import { Container, Grid, Image } from "semantic-ui-react";
 
 //TODO change postr to background and move table up
 const image_base_url = `https://image.tmdb.org/t/p/original/`;
