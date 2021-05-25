@@ -18,7 +18,6 @@ import { getCookie, setCookie, removeCookie } from "./utils/cookies";
 import { connect } from "react-redux";
 import { validateUser } from "./actions";
 import history from "./history";
-import { Embed, Container } from "semantic-ui-react";
 
 //TODO add logic to prevent sending a request to the server on each mount
 import "./styles/app.css";
